@@ -40,6 +40,18 @@
               Женщины
             </a>
             <div class="navbar-dropdown">
+              <div class="columns">
+                <div class="column">
+                  <a class="navbar-item">
+                    About
+                  </a>
+                </div>
+                <div class="column">
+                  <a class="navbar-item">
+                    About
+                  </a>
+                </div>
+              </div>
               <a class="navbar-item">
                 About
               </a>
