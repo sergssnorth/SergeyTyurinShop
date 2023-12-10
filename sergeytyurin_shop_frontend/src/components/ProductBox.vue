@@ -3,7 +3,7 @@
         <router-link v-bind:to="product.get_absolute_url">
             <div class="box">
                 <figure class="image mb-4">
-                    <img v-bind:src="product.get_image">
+                    <img v-bind:src="product.get_image1">
                 </figure>
 
                 <h3 class="is-size-5 has-text-black">{{ product.name }}</h3>

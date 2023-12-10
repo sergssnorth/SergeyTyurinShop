@@ -9,10 +9,11 @@ class ProductSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "get_absolute_url",
-            "description",
             "price",
-            "get_image",
-            "get_thumbnail"
+            "get_image1",
+            "get_image2",
+            "get_image3",
+            "get_image4",
         )
 
 class CategorySerializer(serializers.ModelSerializer):

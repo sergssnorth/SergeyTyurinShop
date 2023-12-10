@@ -4,6 +4,8 @@ import AdminHome from '../views/admin/AdminHome.vue'
 import LogIn from '../views/LogIn.vue'
 import SignUp from '../views/SignUp.vue'
 import Home from '../views/user/Home.vue'
+import Product from '../views/user/Product.vue'
+
 
 
 const routes = [
@@ -26,6 +28,11 @@ const routes = [
     path: '/sign-up',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/product/:big_category_slug/:category_slug/:product_slug',
+    name: 'Product',
+    component: Product
   },
 ]
 

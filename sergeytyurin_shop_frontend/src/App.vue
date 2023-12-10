@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <nav class="navbar is-spaced is-size-5">
+    <nav class="navbar is-spaced is-size-5 has-shadow">
       <div class="navbar-brand">
         <router-link to="/" class="navbar-item">
           <img src="@/assets/LogoST.png" width="168" height="28">
@@ -14,7 +14,7 @@
 
       <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu}">
         <div class="navbar-start">
-          <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-item has-dropdown is-hoverable is-boxed">
             <a class="navbar-link">
               Мужчины
             </a>
