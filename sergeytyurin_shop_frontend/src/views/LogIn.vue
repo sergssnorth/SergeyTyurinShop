@@ -25,7 +25,7 @@
 
                     <div class="field">
                         <div class="control">
-                            <button class="button is-info is-outlined mt-5">Вход</button>
+                            <button class="button is-dark is-outlined mt-5">Вход</button>
                         </div>
                     </div>
 
@@ -104,5 +104,6 @@ export default {
 .button.is-info.is-outlined.mt-5:active{
     background-color: #333;
 }
+
 
 </style>

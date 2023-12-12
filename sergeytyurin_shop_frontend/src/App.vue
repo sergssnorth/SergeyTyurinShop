@@ -72,17 +72,21 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              
               <template v-if="$store.state.isAuthenticated">
-                <router-link to="/my-account" class="button is-light">Мой аккаунт</router-link>
-                <router-link to="/my-records" class="button is-info">
-                  <span>Мои записи</span>
+                <router-link to="/my-orders" class="icon is-medium"><font-awesome-icon icon="fa-solid fa-box-archive"/></router-link>
+                <router-link to="/my-account" class="icon is-medium ml-3"><font-awesome-icon icon="fa-solid fa-user"/></router-link>
+                <router-link to="/cart" class="icon is-medium ml-3">
+                  <font-awesome-icon icon="fa-solid fa-cart-shopping"/>
+                  <span class="mb-1 ml-2">{{ cartTotalLength }}</span>
                 </router-link>
               </template>
-
               <template v-else>
-                <router-link to="/log-in" class="button is-outlined is-info"><span>Вход</span></router-link>
-                <router-link to="/sign-up" class="button is-outlined is-success"><span>Регистрация</span></router-link>
+                <router-link to="/log-in" class="icon is-medium"><font-awesome-icon icon="fa-solid fa-user"/></router-link>
+                <router-link to="/cart" class="icon is-medium ml-3">
+                  <font-awesome-icon icon="fa-solid fa-cart-shopping"/>
+                  <div><span>{{ cartTotalLength }}</span></div>
+                  <span>{{ cartTotalLength }}</span>
+                </router-link>
               </template>
             </div>
           </div>
@@ -101,6 +105,45 @@
   </div>
 </template>
 
+<script>
+import axios from 'axios'
+
+export default {
+  data() {
+    return {
+      showMobileMenu: false,
+      cart: {
+        items: []
+      }
+    }
+  },
+  beforeCreate() {
+    this.$store.commit('initializeStore')
+    const token = this.$store.state.token
+    if (token) {
+        axios.defaults.headers.common['Authorization'] = "Token " + token
+    } else {
+        axios.defaults.headers.common['Authorization'] = ""
+    }
+  },
+  mounted() {
+    this.cart = this.$store.state.cart
+  },
+  computed: {
+      cartTotalLength() {
+          let totalLength = 0
+          for (let i = 0; i < this.cart.items.length; i++) {
+              totalLength += this.cart.items[i].quantity
+          }
+          if (totalLength == 0) {
+            return ''
+          }
+
+          return totalLength
+      }
+  }
+}
+</script>
 
 <style lang="scss">
 @import '../node_modules/bulma';
@@ -109,6 +152,16 @@
   background-color: transparent;
   border-color: #333;
   color: #333;
+}
+
+.icon {
+  color: #333;
+}
+
+.icon:hover {
+  color: #fff;
+  stroke: black;
+  stroke-width: 1.5em;
 }
 
 .button.is-info.is-outlined:hover{

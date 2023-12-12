@@ -1,8 +1,29 @@
 from rest_framework import serializers
 
-from .models import Category, Product
+from .models import Category, Product, AvailableProductSize, ProductSize
+
+
+class ProductSizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductSize
+        fields = (
+            "name",
+            "slug",
+        )
+
+
+class AvailableProductSizeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvailableProductSize
+        fields = (
+            "size_name",
+            "size_slug",
+        )
+
+
 
 class ProductSerializer(serializers.ModelSerializer):
+    available_product_size = AvailableProductSizeSerializer(many=True)
     class Meta:
         model = Product
         fields = (
@@ -14,7 +35,10 @@ class ProductSerializer(serializers.ModelSerializer):
             "get_image2",
             "get_image3",
             "get_image4",
+            "available_product_size",
         )
+
+
 
 class CategorySerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)

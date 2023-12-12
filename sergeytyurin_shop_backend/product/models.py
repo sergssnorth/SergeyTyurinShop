@@ -78,4 +78,29 @@ class Product(models.Model):
             return('http://127.0.0.1:8000' + self.image4.url)
         else: 
             return ''
+
+class ProductSize(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField()
+
+    class Meta:
+        ordering = ('id',)
     
+    def __str__(self):
+        return self.name
+        
+class AvailableProductSize(models.Model):
+    product = models.ForeignKey(Product, related_name='available_product_size', on_delete=models.CASCADE)
+    size = models.ForeignKey(ProductSize, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('size',)
+    
+    def __str__(self):
+        return f'{self.product.name} - {self.size.name}'
+
+    def size_slug(self):
+        return self.size.slug
+    
+    def size_name(self):
+        return self.size.name

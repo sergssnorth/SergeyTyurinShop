@@ -20,28 +20,54 @@
             </div>
             <div class="column is-4">   
                 <h1 class="title is-size-3">{{ product.name }}</h1>
+                <h3 class="title is-size-4">Цена: {{ product.price }} ₽</h3>
 
-                <h3 >Price: ${{ product.price }}</h3>
-
-                <div class="tabs is-toggle">
-                    <ul>
-                        <li v-if="isActiveTrue" v-bind:class="{ 'is-active': isActive == 'XS' }"><a v-on:click="isActive = 'XS'">XS</a></li>
-                        <li v-bind:class="{ 'is-active': isActive == 'S' }"><a v-on:click="isActive = 'S'">S</a></li>
-                        <li v-bind:class="{ 'is-active': isActive == 'M' }"><a v-on:click="isActive = 'M'">M</a></li>
-                        <li v-bind:class="{ 'is-active': isActive == 'L' }"><a v-on:click="isActive = 'L'">L</a></li>
-                    </ul>
-                    
+                <template v-if="availableProductSize">
+                    <div class="tabs is-toggle">
+                        <ul>
+                            <li v-for="size in product.available_product_size" v-bind:class="{ 'is-active': isActive == size.size_name }">
+                                <a v-on:click="isActive = size.size_name">
+                                    {{ size.size_name }}
+                                </a>
+                            </li>
+                        </ul>
                     </div>
 
-                <div class="field has-addons mt-6">
-                    <div class="control">
-                        <input type="number" class="input" min="1" v-model="quantity">
+                    <div class="columns is-gapless">
+                        <div class="column mr-1">
+                            <button class="button is-outlined is-dark" @click="quantityMinus"><font-awesome-icon icon="fa-solid fa-minus"/></button>
+                        </div>
+                        <div class="column is-2">
+                            <input class="input " min="1" v-model="quantity">
+                        </div>
+                        <div class="column ml-1">
+                            <button class="button is-outlined is-dark" @click="quantityPlus"><font-awesome-icon icon="fa-solid fa-plus" /> </button>
+                        </div>
+                        <div class="column is-8">
+                        </div>
+                    </div>
+                    <div class="field has-addons mt-2">
+                        <div class="control">
+                            <a class="button is-outlined is-dark" @click="addToCart()">Добавить в корзину</a>
+                        </div>
                     </div>
 
-                    <div class="control">
-                        <a class="button is-dark" @click="addToCart()">Add to cart</a>
-                    </div>
+                </template>
+                <template v-else>
+                    <span class="title is-4">Нет в наличии</span>
+                </template>
+                
+                <div>
+                    <div class="divider">Информация</div>
                 </div>
+
+                <p class="mb-1"><span class="title is-6">Описание: </span>Эта футболка из мягкого хлопкового джерси, сочетающая визуальные признаки вечной роскоши с
+                современной графической привлекательностью, украшена фирменным логотипом amiri и мотивом ma
+                в сезонном градиенте. этот чай является культовой эмблемой мира и прекрасно сочетается с
+                домашней джинсовой одеждой, брюками или шортами.</p>
+                <p class="mb-1"><span class="title is-6">Коллекция: </span>до весны 2024 года</p>
+                <p class="mb-1"><span class="title is-6">Производство: </span>сделано в италии</p>
+                <p class="mb-1"><span class="title is-6">Состав: </span>100% хлопок</p>
             </div>
         </div>
     </div>
@@ -55,16 +81,41 @@ export default {
     name: 'Product',
     data() {
         return {
-            isActiveTrue: false,
             isActive: 'L',
-            product: {},
+            product: {
+                id : 0,
+                name: "",
+                get_absolute_url: "",
+                price: "",
+                get_image1: "",
+                get_image2: "",
+                get_image3: "",
+                get_image4: "",
+                available_product_size: []
+            },
             quantity: 1
         }
     },
     mounted() {
         this.getProduct() 
     },
+    computed: {
+        availableProductSize() {
+            console.log(this.product.available_product_size)
+            console.log(this.product.available_product_size.length)
+            if (this.product.available_product_size.length > 0) {
+                return true
+            }
+        }
+    },
     methods: {
+        quantityPlus() {
+            this.quantity += 1
+        },
+        quantityMinus() {
+            this.quantity -= 1
+        },
+
         async getProduct() {
             // this.$store.commit('setIsLoading', true)
 
@@ -92,6 +143,7 @@ export default {
 
             const item = {
                 product: this.product,
+                size: this.isActive,
                 quantity: this.quantity
             }
 
@@ -109,3 +161,38 @@ export default {
     }
 }
 </script>
+
+
+<style lang="scss">
+@import '../../../node_modules/bulma';
+@import '../../../node_modules/~@creativebulma/bulma-divider';
+.tabs.is-toggle li.is-active a {
+  background-color: #333;
+  color: #fff;
+}
+
+.button.is-dark.is-outlined:focus{
+    background-color: transparent;
+    border-color: hsl(0, 0%, 21%);
+    color: hsl(0, 0%, 21%);
+}
+
+.button.is-dark.is-outlined:active{
+    background-color: transparent;
+    border-color: hsl(0, 0%, 21%);
+    color: hsl(0, 0%, 21%);
+}
+
+
+.input {
+    background-color: hsl(0, 0%, 100%);
+    border-color: #333;
+    border-radius: 4px;
+    color: hsl(0, 0%, 21%);
+}
+
+span {
+    color: #333
+}
+
+</style>
