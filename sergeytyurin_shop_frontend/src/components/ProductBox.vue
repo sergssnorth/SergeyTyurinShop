@@ -23,6 +23,14 @@ export default {
 </script>
 
 <style scoped>
+
+.box {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
   .image {
     margin-top: -1.25rem;
     margin-left: -1.25rem;

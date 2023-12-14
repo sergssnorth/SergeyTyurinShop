@@ -4,7 +4,7 @@
             <div class="column is-8">   
                 <div class="columns is-multiline is-gapless">
                     <div class="column is-6">
-                        <figure class="image mb-6">
+                        <figure class="image">
                             <img v-bind:src="product.get_image1">
                             <img v-bind:src="product.get_image3">
                         </figure>
@@ -33,7 +33,7 @@
                         </ul>
                     </div>
 
-                    <div class="columns is-gapless">
+                    <div class="columns is-mobile is-gapless">
                         <div class="column mr-1">
                             <button class="button is-outlined is-dark" @click="quantityMinus"><font-awesome-icon icon="fa-solid fa-minus"/></button>
                         </div>
@@ -150,7 +150,7 @@ export default {
             this.$store.commit('addToCart', item)
 
             toast({
-                message: 'The product was added to the cart',
+                message: 'Продукт добавлен в корзину',
                 type: 'is-success',
                 dismissible: true,
                 pauseOnHover: true,

@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'sergey-tyurin-dev',
         'USER': 'postgres',
         'PASSWORD': 'Ytrewq994',
-        'HOST': 'localhost',
+        'HOST': 'localhost', 
         'PORT': '5432',
     }
 }

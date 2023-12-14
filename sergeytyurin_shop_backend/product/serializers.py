@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Category, Product, AvailableProductSize, ProductSize
+from .models import BigCategory, Category, Product, AvailableProductSize, ProductSize
 
 
 class ProductSizeSerializer(serializers.ModelSerializer):
@@ -38,14 +38,21 @@ class ProductSerializer(serializers.ModelSerializer):
             "available_product_size",
         )
 
+class BigCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BigCategory
+        fields = (
+            "id",
+            "slug",
+        )
 
 
 class CategorySerializer(serializers.ModelSerializer):
     products = ProductSerializer(many=True)
-
     class Meta:
         model = Category
         fields = (
+            "big_category",
             "id",
             "name",
             "get_absolute_url",

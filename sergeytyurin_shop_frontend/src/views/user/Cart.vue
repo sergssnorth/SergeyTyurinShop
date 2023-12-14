@@ -14,7 +14,7 @@
                             <th>Цена</th>
                             <th>Количество</th>
                             <th>Сумма</th>
-                            <th></th>
+
                         </tr>
                     </thead>
 
@@ -31,13 +31,13 @@
             </div>
 
             <div class="column is-12 box">
-                <h2 class="subtitle">Summary</h2>
+                <h2 class="subtitle">Оплата</h2>
 
-                <strong>${{ cartTotalPrice.toFixed(2) }}</strong>, {{ cartTotalLength }} items
+                <strong>{{ cartTotalPrice.toFixed(2) }} ₽</strong>, {{ cartTotalLength }} вещи
 
                 <hr>
 
-                <router-link to="/cart/checkout" class="button is-dark">Proceed to checkout</router-link>
+                <router-link to="/cart/payment" class="button is-dark">Перейти к оплате</router-link>
             </div>
         </div>
     </div>

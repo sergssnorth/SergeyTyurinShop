@@ -32,7 +32,7 @@ class Category(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return f'/{self.slug}/'
+        return f'products/{self.big_category.slug}/{self.slug}/'
 
 
 class Product(models.Model):

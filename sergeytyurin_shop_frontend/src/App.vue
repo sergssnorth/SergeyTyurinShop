@@ -18,52 +18,24 @@
             <a class="navbar-link">
               Мужчины
             </a>
-
             <div class="navbar-dropdown">
-              <a class="navbar-item">
-                About
-              </a>
-              <a class="navbar-item">
-                Jobs
-              </a>
-              <a class="navbar-item">
-                Contact
-              </a>
-              <hr class="navbar-divider">
-              <a class="navbar-item">
-                Report an issue
+              <a v-for="category in men_categories" class="navbar-item">
+                <router-link v-bind:to="category.get_absolute_url" class="custom_a is-size-6" replace>
+                  {{ category.name }}
+                </router-link>
               </a>
             </div>
           </div>
-          <div class="navbar-item has-dropdown is-hoverable">
+          
+          <div class="navbar-item has-dropdown is-hoverable is-boxed">
             <a class="navbar-link">
               Женщины
             </a>
             <div class="navbar-dropdown">
-              <div class="columns">
-                <div class="column">
-                  <a class="navbar-item">
-                    About
-                  </a>
-                </div>
-                <div class="column">
-                  <a class="navbar-item">
-                    About
-                  </a>
-                </div>
-              </div>
-              <a class="navbar-item">
-                About
-              </a>
-              <a class="navbar-item">
-                Jobs
-              </a>
-              <a class="navbar-item">
-                Contact
-              </a>
-              <hr class="navbar-divider">
-              <a class="navbar-item">
-                Report an issue
+              <a v-for="category in women_categories" class="navbar-item">
+                <router-link v-bind:to="category.get_absolute_url" class="custom_a is-size-6">
+                  {{ category.name }}
+                </router-link>
               </a>
             </div>
           </div>
@@ -114,7 +86,9 @@ export default {
       showMobileMenu: false,
       cart: {
         items: []
-      }
+      },
+      men_categories: [],
+      women_categories: [],
     }
   },
   beforeCreate() {
@@ -128,20 +102,48 @@ export default {
   },
   mounted() {
     this.cart = this.$store.state.cart
+    this.getCategories()
   },
   computed: {
-      cartTotalLength() {
-          let totalLength = 0
-          for (let i = 0; i < this.cart.items.length; i++) {
-              totalLength += this.cart.items[i].quantity
-          }
-          if (totalLength == 0) {
+        cartTotalLength() {
+            let totalLength = 0
+            for (let i = 0; i < this.cart.items.length; i++) {
+                totalLength += this.cart.items[i].quantity
+            }
+            if (totalLength == 0) {
             return ''
-          }
+            }
 
-          return totalLength
-      }
-  }
+            return totalLength
+        }
+    },
+    methods: {
+        async getCategories() {
+            this.$store.commit('setIsLoading', true)
+
+                await axios
+                    .get('/api/v1/categories/mens/')
+                    .then(response => {
+                        this.men_categories = response.data
+                        console.log(this.men_categories)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+                
+                    await axios
+                    .get('/api/v1/categories/womens/')
+                    .then(response => {
+                        this.women_categories = response.data
+                        console.log(this.women_categories)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            
+            this.$store.commit('setIsLoading', false)
+        }
+    }
 }
 </script>
 
@@ -154,8 +156,23 @@ export default {
   color: #333;
 }
 
+a.navbar-link:not(.is-arrowless)::after {
+  border-color: #333;
+}
+a.navbar-link:hover {
+    color: #000;
+}
+
 .icon {
   color: #333;
+}
+
+a.custom_a {
+    color: #333;
+}
+
+a.custom_a:hover {
+    color: #000;
 }
 
 .icon:hover {
