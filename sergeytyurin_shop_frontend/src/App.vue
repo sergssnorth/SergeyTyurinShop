@@ -20,7 +20,7 @@
             </a>
             <div class="navbar-dropdown">
               <a v-for="category in men_categories" class="navbar-item">
-                <router-link v-bind:to="category.get_absolute_url" class="custom_a is-size-6" replace>
+                <router-link v-bind:to="category.get_absolute_url" class="custom_a is-size-6">
                   {{ category.name }}
                 </router-link>
               </a>
@@ -45,7 +45,8 @@
           <div class="navbar-item">
             <div class="buttons">
               <template v-if="$store.state.isAuthenticated">
-                <router-link to="/my-orders" class="icon is-medium"><font-awesome-icon icon="fa-solid fa-box-archive"/></router-link>
+                <router-link to="/about-us" class="icon is-medium"><font-awesome-icon icon="fa-solid fa-circle-info"/></router-link>
+                <router-link to="/my-orders" class="icon is-medium ml-3"><font-awesome-icon icon="fa-solid fa-box-archive"/></router-link>
                 <router-link to="/my-account" class="icon is-medium ml-3"><font-awesome-icon icon="fa-solid fa-user"/></router-link>
                 <router-link to="/cart" class="icon is-medium ml-3">
                   <font-awesome-icon icon="fa-solid fa-cart-shopping"/>
@@ -53,6 +54,7 @@
                 </router-link>
               </template>
               <template v-else>
+                <router-link to="/about-us" class="icon is-medium"><font-awesome-icon icon="fa-solid fa-circle-info"/></router-link>
                 <router-link to="/log-in" class="icon is-medium"><font-awesome-icon icon="fa-solid fa-user"/></router-link>
                 <router-link to="/cart" class="icon is-medium ml-3">
                   <font-awesome-icon icon="fa-solid fa-cart-shopping"/>

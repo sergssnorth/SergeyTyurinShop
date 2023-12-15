@@ -1,9 +1,6 @@
 from django.core.files import File
 from django.db import models
-
-
-from django.core.files import File
-from django.db import models
+from django.contrib.auth.models import User
 
 
 class BigCategory(models.Model):
@@ -32,7 +29,7 @@ class Category(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return f'products/{self.big_category.slug}/{self.slug}/'
+        return f'/{self.big_category.slug}/{self.slug}/'
 
 
 class Product(models.Model):
@@ -53,7 +50,7 @@ class Product(models.Model):
         return self.name
     
     def get_absolute_url(self):
-        return f'product/{self.category.big_category.slug}/{self.category.slug}/{self.slug}/'
+        return f'/product/{self.category.big_category.slug}/{self.category.slug}/{self.slug}/'
     
     def get_image1(self):
         if self.image1:
@@ -104,3 +101,31 @@ class AvailableProductSize(models.Model):
     
     def size_name(self):
         return self.size.name
+    
+
+        
+class Client(models.Model):
+    user = models.ForeignKey(User, related_name='client_information', on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    sname = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    phone = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ('user',)
+    
+    def __str__(self):
+        return f'{self.user.username}'
+
+class ClientDeliveryInformation(models.Model):
+    client = models.ForeignKey(Client, related_name='client_delivery_information', on_delete=models.CASCADE)
+    region = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    street = models.CharField(max_length=100)
+    building = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ('client',)
+    
+    def __str__(self):
+        return f'{self.client.user.username}'

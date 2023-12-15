@@ -7,8 +7,9 @@ import Home from '../views/user/Home.vue'
 import Product from '../views/user/Product.vue'
 import Cart from '../views/user/Cart.vue'
 import Payment from '../views/user/Payment.vue'
-import CategoryProduct from '../views/user/CategoryProduct.vue'
-
+import Category from '../views/user/Category.vue'
+import AboutUs from '../views/user/AboutUs.vue'
+import MyAccount from '../views/user/MyAccount.vue'
 
 
 const routes = [
@@ -38,6 +39,11 @@ const routes = [
     component: Product
   },
   {
+    path: '/:big_category_slug/:category_slug',
+    name: 'Category',
+    component: Category
+  },
+  {
     path: '/cart',
     name: 'Cart',
     component: Cart
@@ -51,10 +57,16 @@ const routes = [
     }
   },
   {
-    path: '/products/:big_category_slug/:category_slug',
-    name: 'CategoryProduct',
-    component: CategoryProduct
+    path: '/about-us',
+    name: 'AboutUs',
+    component: AboutUs
   },
+  {
+    path: '/my-account',
+    name: 'MyAccount',
+    component: MyAccount
+  },
+
 ]
 
 const router = createRouter({

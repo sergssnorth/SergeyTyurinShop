@@ -40,10 +40,9 @@
                 </table>
             </div>
 
-            <div class="column is-12 box">
+            <div class="column is-12 box mb-0">
                 <h2 class="subtitle">Детали доставки</h2>
-
-                <p class="has-text-grey mb-4">* Все поля обязательны к заполнению</p>
+                <p class="has-text-grey mb-4">* Все поля обязательны к заполнению, доставка осуществляется Почтой России</p>
 
                 <div class="columns is-multiline">
                     <div class="column is-6">
@@ -120,7 +119,7 @@
 import axios from 'axios'
 
 export default {
-    name: 'Checkout',
+    name: 'Payment',
     data() {
         return {
             cart: {
@@ -138,7 +137,7 @@ export default {
         }
     },
     mounted() {
-        document.title = 'Checkout | Djackets'
+        document.title = 'Оплата'
         this.cart = this.$store.state.cart
 
     },

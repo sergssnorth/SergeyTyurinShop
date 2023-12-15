@@ -27,7 +27,7 @@
     mounted() {
       this.getLatestProducts()
       document.image
-      document.title = 'Главная страница | СТ'
+      document.title = 'Главная страница'
     },
     methods: {
       async getLatestProducts() {
