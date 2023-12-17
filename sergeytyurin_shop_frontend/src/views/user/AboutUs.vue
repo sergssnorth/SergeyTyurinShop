@@ -10,19 +10,19 @@
         <p>Бренд презентует свои сезонные коллекции в рамках Недели моды в Париже и претендует на статус одного из самых перспективных и заметных проектов в фэшн-индустрии. Команда дизайнеров Сергей Тюрина создает одежду для таких же, как они – для современной аудитории, живущей в потоке информации и свободной от общественных рамок.</p>
         <p>Вещи из коллекций Сергей Тюрин можно приобрести во флагманских магазинах в Москве, а также на сайте sergeytyurin.com.</p>
         <div class="columns mt-5">
-            <div class="column is-4">
+            <div class="column is-3">
                 <h4>ПО ВОПРОСАМ, СВЯЗАННЫМ С ЗАКАЗАМИ И РАБОТОЙ САЙТА:</h4>
-                <p>order@volchok.ru</p>
+                <p>order@sergssnorth.ru</p>
                 <p>+7 (966) 056-06-95</p>
                 <p>11:00-20:00</p>
             </div>
-            <div class="column is-4">
+            <div class="column is-3 is-offset-1">
                 <h4>ПО ПОВОДУ ОПТОВЫХ ЗАКАЗОВ:</h4>
-                <p>volchoksales@gmail.com</p>
+                <p>sergssnorth@gmail.com</p>
             </div>
-            <div class="column is-4">
+            <div class="column is-3 is-offset-1">
                 <h4>ПО ПОВОДУ СОТРУДНИЧЕСТВА:</h4>
-                <p>volchokclothing@gmail.com</p>
+                <p>sergssnorthclothing@gmail.com</p>
             </div>
         </div>
     </div>

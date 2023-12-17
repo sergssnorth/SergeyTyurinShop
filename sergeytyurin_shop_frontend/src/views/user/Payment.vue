@@ -49,51 +49,58 @@
                         <div class="field">
                             <label>Имя*</label>
                             <div class="control">
-                                <input type="text" class="input" v-model="first_name">
+                                <input type="text" class="input" v-model="accountInformation.name">
                             </div>
                         </div>
 
                         <div class="field">
                             <label>Фамилия*</label>
                             <div class="control">
-                                <input type="text" class="input" v-model="last_name">
+                                <input type="text" class="input" v-model="accountInformation.sname">
                             </div>
                         </div>
 
                         <div class="field">
                             <label>E-mail*</label>
                             <div class="control">
-                                <input type="email" class="input" v-model="email">
+                                <input type="email" class="input" v-model="accountInformation.email">
                             </div>
                         </div>
 
                         <div class="field">
                             <label>Телефон*</label>
                             <div class="control">
-                                <input type="text" class="input" v-model="phone">
+                                <input type="text" class="input" v-model="accountInformation.phone">
                             </div>
                         </div>
                     </div>
 
                     <div class="column is-6">
                         <div class="field">
-                            <label>Город*</label>
+                            <label>Область*</label>
                             <div class="control">
-                                <input type="text" class="input" v-model="city">
+                                <input type="text" class="input" v-model="accountInformation.client_delivery_information[0].region">
                             </div>
                         </div>
 
                         <div class="field">
-                            <label>Адрес*</label>
+                            <label>Город*</label>
                             <div class="control">
-                                <input type="text" class="input" v-model="address">
+                                <input type="text" class="input" v-model="accountInformation.client_delivery_information[0].city">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Улица*</label>
+                            <div class="control">
+                                <input type="text" class="input" v-model="accountInformation.client_delivery_information[0].street">
                             </div>
                         </div>
 
                         <div class="field">
                             <label>Дом*</label>
                             <div class="control">
-                                <input type="text" class="input" v-model="building">
+                                <input type="text" class="input" v-model="accountInformation.client_delivery_information[0].building">
                             </div>
                         </div>
                     </div>
@@ -122,17 +129,25 @@ export default {
     name: 'Payment',
     data() {
         return {
+            user_id: 0,
+            accountInformation: {
+                client_delivery_information: [
+                    {
+                        region: "",
+                        city: "",
+                        street: "",
+                        building: ""
+                    }
+                ],
+                name: "",
+                sname: "",
+                email: "",
+                phone: ""
+            },
             cart: {
                 items: []
             },
             card: {},
-            first_name: '',
-            last_name: '',
-            email: '',
-            phone: '',
-            city: '',
-            address: '',
-            building: '',
             errors: []
         }
     },
@@ -148,32 +163,36 @@ export default {
         submitForm() {
             this.errors = []
 
-            if (this.first_name === '') {
-                this.errors.push('The first name field is missing!')
+            if (this.accountInformation.name === '') {
+                this.errors.push('Поле имя не заполнено!')
             }
 
-            if (this.last_name === '') {
-                this.errors.push('The last name field is missing!')
+            if (this.accountInformation.sname === '') {
+                this.errors.push('Поле фамилия не заполнено!')
             }
 
-            if (this.email === '') {
-                this.errors.push('The email field is missing!')
+            if (this.accountInformation.email === '') {
+                this.errors.push('Поле e-mail не заполненно!')
             }
 
-            if (this.phone === '') {
-                this.errors.push('The phone field is missing!')
+            if (this.accountInformation.phone === '') {
+                this.errors.push('Поле телефон не заполненно!')
             }
 
-            if (this.address === '') {
-                this.errors.push('The address field is missing!')
+            if (this.accountInformation.client_delivery_information[0].region === '') {
+                this.errors.push('Поле область не заполненно!')
             }
 
-            if (this.zipcode === '') {
-                this.errors.push('The zip code field is missing!')
+            if (this.accountInformation.client_delivery_information[0].city === '') {
+                this.errors.push('Поле город не заполненно!')
             }
 
-            if (this.place === '') {
-                this.errors.push('The place field is missing!')
+            if (this.accountInformation.client_delivery_information[0].street === '') {
+                this.errors.push('Поле улица не заполненно!')
+            }
+
+            if (this.accountInformation.client_delivery_information[0].building === '') {
+                this.errors.push('Поле дом не заполненно!')
             }
 
             if (!this.errors.length) {
@@ -207,15 +226,17 @@ export default {
             }
 
             const data = {
-                'first_name': this.first_name,
-                'last_name': this.last_name,
-                'email': this.email,
-                'address': this.address,
-                'zipcode': this.zipcode,
-                'place': this.place,
-                'phone': this.phone,
+                'first_name': this.accountInformation.name,
+                'last_name': this.accountInformation.sname,
+                'email': this.accountInformation.email,
+                'phone': this.accountInformation.phone,
+
+                'region': this.accountInformation.client_delivery_information[0].region,
+                'city': this.accountInformation.client_delivery_information[0].city,
+                'street': this.accountInformation.client_delivery_information[0].street,
+                'building': this.accountInformation.client_delivery_information[0].building,
+                
                 'items': items,
-                'stripe_token': token.id
             }
 
             await axios

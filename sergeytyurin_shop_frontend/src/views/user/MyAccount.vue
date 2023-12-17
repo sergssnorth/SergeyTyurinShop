@@ -181,48 +181,42 @@ export default {
         submitForm() {
             this.errors = []
 
-            if (this.first_name === '') {
-                this.errors.push('The first name field is missing!')
+            if (this.accountInformation.name === '') {
+                this.errors.push('Поле имя не заполнено!')
             }
 
-            if (this.last_name === '') {
-                this.errors.push('The last name field is missing!')
+            if (this.accountInformation.sname === '') {
+                this.errors.push('Поле фамилия не заполнено!')
             }
 
-            if (this.email === '') {
-                this.errors.push('The email field is missing!')
+            if (this.accountInformation.email === '') {
+                this.errors.push('Поле e-mail не заполненно!')
             }
 
-            if (this.phone === '') {
-                this.errors.push('The phone field is missing!')
+            if (this.accountInformation.phone === '') {
+                this.errors.push('Поле телефон не заполненно!')
             }
 
-            if (this.address === '') {
-                this.errors.push('The address field is missing!')
+            if (this.accountInformation.client_delivery_information[0].region === '') {
+                this.errors.push('Поле область не заполненно!')
             }
 
-            if (this.zipcode === '') {
-                this.errors.push('The zip code field is missing!')
+            if (this.accountInformation.client_delivery_information[0].city === '') {
+                this.errors.push('Поле город не заполненно!')
             }
 
-            if (this.place === '') {
-                this.errors.push('The place field is missing!')
+            if (this.accountInformation.client_delivery_information[0].street === '') {
+                this.errors.push('Поле улица не заполненно!')
+            }
+
+            if (this.accountInformation.client_delivery_information[0].building === '') {
+                this.errors.push('Поле дом не заполненно!')
             }
 
             if (!this.errors.length) {
                 this.$store.commit('setIsLoading', true)
 
-                this.stripe.createToken(this.card).then(result => {                    
-                    if (result.error) {
-                        this.$store.commit('setIsLoading', false)
-
-                        this.errors.push('Something went wrong with Stripe. Please try again')
-
-                        console.log(result.error.message)
-                    } else {
-                        this.stripeTokenHandler(result.token)
-                    }
-                })
+                
             }
         },
     },

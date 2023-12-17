@@ -55,11 +55,10 @@
               </template>
               <template v-else>
                 <router-link to="/about-us" class="icon is-medium"><font-awesome-icon icon="fa-solid fa-circle-info"/></router-link>
-                <router-link to="/log-in" class="icon is-medium"><font-awesome-icon icon="fa-solid fa-user"/></router-link>
+                <router-link to="/log-in" class="icon is-medium ml-3"><font-awesome-icon icon="fa-solid fa-user"/></router-link>
                 <router-link to="/cart" class="icon is-medium ml-3">
                   <font-awesome-icon icon="fa-solid fa-cart-shopping"/>
-                  <div><span>{{ cartTotalLength }}</span></div>
-                  <span>{{ cartTotalLength }}</span>
+                  <span class="mb-1 ml-2">{{ cartTotalLength }}</span>
                 </router-link>
               </template>
             </div>
