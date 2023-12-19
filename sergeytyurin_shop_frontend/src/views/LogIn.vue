@@ -57,43 +57,52 @@ export default {
         async submitForm() {
             this.errors = []
             axios.defaults.headers.common["Authorization"] = ""
-
             localStorage.removeItem("token")
 
-            const formData = {
-                username: this.username,
-                password: this.password
+            if (this.username === '') {
+                this.errors.push('Поле логин не заполнено!')
             }
 
-            console.log(formData)
-            
-            await axios
-                .post("/api/v1/token/login/", formData)
-                .then(response => {
-                    console.log(response)
-                    const auth_token = response.data.auth_token
+            if (this.password === '') {
+                this.errors.push('Поле пароль не заполнено!')
+            }
 
-                    this.$store.commit('setToken', auth_token)
-                    
-                    axios.defaults.headers.common["Authorization"] = "Token " + auth_token
+            if (!this.errors.length) {
+                const formData = {
+                    username: this.username,
+                    password: this.password
+                }
 
-                    localStorage.setItem("token", auth_token)
+                console.log(formData)
+                
+                await axios
+                    .post("/api/v1/token/login/", formData)
+                    .then(response => {
+                        console.log(response)
+                        const auth_token = response.data.auth_token
 
-                    const toPath = this.$route.query.to || '/'
-
-                    this.$router.push(toPath)
-                })
-                .catch(error => {
-                    if (error.response) {
-                        for (const property in error.response.data) {
-                            this.errors.push(`${property}: ${error.response.data[property]}`)
-                        }
-                    } else {
-                        this.errors.push('Something went wrong. Please try again')
+                        this.$store.commit('setToken', auth_token)
                         
-                        console.log(JSON.stringify(error))
-                    }
-                })
+                        axios.defaults.headers.common["Authorization"] = "Token " + auth_token
+
+                        localStorage.setItem("token", auth_token)
+
+                        const toPath = this.$route.query.to || '/'
+
+                        this.$router.push(toPath)
+                    })
+                    .catch(error => {
+                        if (error.response) {
+                            for (const property in error.response.data) {
+                                this.errors.push(`${property}: ${error.response.data[property]}`)
+                            }
+                        } else {
+                            this.errors.push('Something went wrong. Please try again')
+                            
+                            console.log(JSON.stringify(error))
+                        }
+                    })
+            }
         }
     }
 }

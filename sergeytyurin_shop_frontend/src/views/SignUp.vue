@@ -32,13 +32,13 @@
 
                     <div class="field">
                         <div class="control">
-                            <button class="button is-success is-outlined mt-5">Регистрация</button>
+                            <button class="button is-dark is-outlined mt-5">Регистрация</button>
                         </div>
                     </div>
 
                     <hr>
-
                     Или <router-link to="/log-in">кликните здесь</router-link> для Входа!
+                    Нажимая кнопку "Получить код", Вы соглашаетесь c условиями <router-link to="/log-in">политики конфиденциальности</router-link>
                 </form>
             </div>
         </div>
@@ -65,15 +65,20 @@ export default {
             this.errors = []
 
             if (this.username === '') {
-                this.errors.push('The username is missing')
+                this.errors.push('Поле логин не заполнено!')
             }
 
             if (this.password === '') {
-                this.errors.push('The password is too short')
+                this.errors.push('Поле пароль не заполнено!')
             }
 
+            if (this.password2 === '') {
+                this.errors.push('Поле поворите пароль не заполнено!')
+            }
+
+
             if (this.password !== this.password2) {
-                this.errors.push('The passwords doesn\'t match')
+                this.errors.push('Поле пароль и повторите пароль не заполнено!')
             }
 
             if (!this.errors.length) {
@@ -93,7 +98,6 @@ export default {
                             duration: 2000,
                             position: 'bottom-right',
                         })
-
                         this.$router.push('/log-in')
                     })
                     .catch(error => {
@@ -114,3 +118,11 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+.button.is-success.is-outlined.mt-5:active{
+    background-color: #333;
+}
+
+
+</style>
