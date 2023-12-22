@@ -37,8 +37,8 @@
                     </div>
 
                     <hr>
+                    <p class="is-size-6 mb-3">Нажимая кнопку "Регистрация", Вы соглашаетесь c условиями <router-link to="/privacy-policies">политики конфиденциальности</router-link> и <router-link to="/personal-data-processing-policy">политикой обработки персональных данных</router-link></p>
                     Или <router-link to="/log-in">кликните здесь</router-link> для Входа!
-                    Нажимая кнопку "Получить код", Вы соглашаетесь c условиями <router-link to="/log-in">политики конфиденциальности</router-link>
                 </form>
             </div>
         </div>

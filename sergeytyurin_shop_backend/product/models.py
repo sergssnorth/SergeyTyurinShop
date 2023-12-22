@@ -8,7 +8,7 @@ class BigCategory(models.Model):
     slug = models.SlugField()
 
     class Meta:
-        ordering = ('name',)
+        ordering = ('id',)
     
     def __str__(self):
         return self.name
@@ -77,11 +77,13 @@ class Product(models.Model):
             return ''
 
 class ProductSize(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, verbose_name="Название")
     slug = models.SlugField()
 
     class Meta:
         ordering = ('id',)
+        verbose_name = "Размер одежды"
+        verbose_name_plural = "Размеры одежды"
     
     def __str__(self):
         return self.name

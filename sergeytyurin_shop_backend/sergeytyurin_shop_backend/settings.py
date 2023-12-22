@@ -39,6 +39,7 @@ CORS_ALLOWED_ORIGINS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'djoser',
+    'debug_toolbar',
 
     'product',
     'order',
@@ -64,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'sergeytyurin_shop_backend.urls'
@@ -90,27 +93,27 @@ WSGI_APPLICATION = 'sergeytyurin_shop_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'sergey-tyurin-dev',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Ytrewq994',
-#         'HOST': 'localhost', 
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'sergey-tyurin-dev',
-        'USER': 'sergey',
-        'PASSWORD': 'ytrewq994',
-        'HOST': 'localhost',
+        'USER': 'postgres',
+        'PASSWORD': 'Ytrewq994',
+        'HOST': 'localhost', 
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'sergey-tyurin-dev',
+#         'USER': 'sergey',
+#         'PASSWORD': 'ytrewq994',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 
@@ -136,9 +139,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -154,3 +157,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+JAZZMIN_SETTINGS = { 
+}

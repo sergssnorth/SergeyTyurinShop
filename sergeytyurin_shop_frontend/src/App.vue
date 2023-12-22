@@ -14,25 +14,12 @@
 
       <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu}">
         <div class="navbar-start">
-          <div class="navbar-item has-dropdown is-hoverable is-boxed">
+          <div  v-for="big_category in categories" class="navbar-item has-dropdown is-hoverable is-boxed">
             <a class="navbar-link">
-              Мужчины
+                {{big_category[0].big_category.name}}
             </a>
             <div class="navbar-dropdown">
-              <a v-for="category in men_categories" class="navbar-item">
-                <router-link v-bind:to="category.get_absolute_url" class="custom_a is-size-6">
-                  {{ category.name }}
-                </router-link>
-              </a>
-            </div>
-          </div>
-          
-          <div class="navbar-item has-dropdown is-hoverable is-boxed">
-            <a class="navbar-link">
-              Женщины
-            </a>
-            <div class="navbar-dropdown">
-              <a v-for="category in women_categories" class="navbar-item">
+              <a v-for="category in big_category" class="navbar-item">
                 <router-link v-bind:to="category.get_absolute_url" class="custom_a is-size-6">
                   {{ category.name }}
                 </router-link>
@@ -88,8 +75,8 @@ export default {
       cart: {
         items: []
       },
-      men_categories: [],
-      women_categories: [],
+      big_categories: [],
+      categories: [],
     }
   },
   beforeCreate() {
@@ -101,9 +88,10 @@ export default {
         axios.defaults.headers.common['Authorization'] = ""
     }
   },
-  mounted() {
+  async mounted() {
     this.cart = this.$store.state.cart
-    this.getCategories()
+    await this.getBigCategories()
+    await this.getCategories()
   },
   computed: {
         cartTotalLength() {
@@ -119,31 +107,42 @@ export default {
         }
     },
     methods: {
+      async getBigCategories() {
+            this.$store.commit('setIsLoading', true)
+            await axios
+                .get('/api/v1/big-categories/')
+                    .then(response => {
+                        this.big_categories = response.data
+                        console.log(this.big_categories)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            this.$store.commit('setIsLoading', false)
+        },
+
         async getCategories() {
             this.$store.commit('setIsLoading', true)
 
+            
+            var big_categories = this.big_categories
+            await Promise.all(
+                big_categories.map(async (big_category) => {
                 await axios
-                    .get('/api/v1/categories/mens/')
+                    .get(`/api/v1/categories/${big_category.slug}/`)
                     .then(response => {
-                        this.men_categories = response.data
-                        console.log(this.men_categories)
+                        this.categories.push(response.data)
                     })
                     .catch(error => {
                         console.log(error)
                     })
-                
-                    await axios
-                    .get('/api/v1/categories/womens/')
-                    .then(response => {
-                        this.women_categories = response.data
-                        console.log(this.women_categories)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
+            }))
+            console.log("1")
+            console.log(this.categories)
+            console.log("1")
             
             this.$store.commit('setIsLoading', false)
-        }
+        },
     }
 }
 </script>

@@ -5,8 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Product, Category
-from .serializers import ProductSerializer, CategorySerializer
+from .models import Product, Category, BigCategory
+from .serializers import ProductSerializer, CategorySerializer, BigCategorySerializer
 
 
 class LatestProductsList(APIView):
@@ -29,6 +29,12 @@ class ProductDetail(APIView):
         serializer = ProductSerializer(product)
         return Response(serializer.data)
     
+class BigCategoriesList(APIView):
+    def get(self, request, format=None):
+        big_category = BigCategory.objects.filter()
+        serializer = BigCategorySerializer(big_category, many=True)
+        return Response(serializer.data)
+
 class CategoriesList(APIView):
     def get(self, request, big_category_slug, format=None):
         products = Category.objects.filter(big_category__slug = big_category_slug)

@@ -43,11 +43,13 @@ class BigCategorySerializer(serializers.ModelSerializer):
         model = BigCategory
         fields = (
             "id",
+            "name",
             "slug",
         )
 
 
 class CategorySerializer(serializers.ModelSerializer):
+    big_category = BigCategorySerializer()
     products = ProductSerializer(many=True)
     class Meta:
         model = Category

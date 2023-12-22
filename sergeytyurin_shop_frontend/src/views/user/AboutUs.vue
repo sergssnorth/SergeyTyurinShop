@@ -12,17 +12,17 @@
         <div class="columns mt-5">
             <div class="column is-3">
                 <h4>ПО ВОПРОСАМ, СВЯЗАННЫМ С ЗАКАЗАМИ И РАБОТОЙ САЙТА:</h4>
-                <p>order@sergssnorth.ru</p>
+                <p>sergeytyurinsupport@sergssnorth.ru</p>
                 <p>+7 (966) 056-06-95</p>
                 <p>11:00-20:00</p>
             </div>
             <div class="column is-3 is-offset-1">
                 <h4>ПО ПОВОДУ ОПТОВЫХ ЗАКАЗОВ:</h4>
-                <p>sergssnorth@gmail.com</p>
+                <p>sergeytyurinorder@gmail.com</p>
             </div>
             <div class="column is-3 is-offset-1">
                 <h4>ПО ПОВОДУ СОТРУДНИЧЕСТВА:</h4>
-                <p>sergssnorthclothing@gmail.com</p>
+                <p>sergeytyurincollaboration@gmail.com</p>
             </div>
         </div>
     </div>
