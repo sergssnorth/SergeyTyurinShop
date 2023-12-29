@@ -2,6 +2,7 @@ from django.core.files import File
 from django.db import models
 from django.contrib.auth.models import User
 
+BASE_BACKEND_URL = 'http://127.0.0.1:8000'
 
 class BigCategory(models.Model):
     name = models.CharField(max_length=255)
@@ -54,25 +55,29 @@ class Product(models.Model):
     
     def get_image1(self):
         if self.image1:
-            return('http://127.0.0.1:8000' + self.image1.url)
+            # return('http://127.0.0.1:8000' + self.image1.url)
+            return(BASE_BACKEND_URL + self.image1.url)
         else: 
             return ''
         
     def get_image2(self):
         if self.image2:
-            return('http://127.0.0.1:8000' + self.image2.url)
+            # return('http://127.0.0.1:8000' + self.image2.url)
+            return(BASE_BACKEND_URL + self.image2.url)
         else: 
             return ''
         
     def get_image3(self):
         if self.image3:
-            return('http://127.0.0.1:8000' + self.image3.url)
+            # return('http://127.0.0.1:8000' + self.image3.url)
+            return(BASE_BACKEND_URL + self.image3.url)
         else: 
             return ''
         
     def get_image4(self):
         if self.image4:
-            return('http://127.0.0.1:8000' + self.image4.url)
+            # return('http://127.0.0.1:8000' + self.image4.url)
+            return(BASE_BACKEND_URL + self.image4.url)
         else: 
             return ''
 

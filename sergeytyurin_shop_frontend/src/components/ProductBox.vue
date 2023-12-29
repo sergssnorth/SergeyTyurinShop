@@ -1,13 +1,13 @@
 <template>
-    <div class="column is-3">
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 px-1">
         <router-link v-bind:to="product.get_absolute_url">
-            <div class="box">
-                <figure class="image mb-4">
-                    <img v-bind:src="product.get_image1">
-                </figure>
-
-                <h3 class="is-size-5 has-text-black">{{ product.name }}</h3>
-                <p class="is-size-6 has-text-grey">₽ {{ product.price }}</p>
+            <div class="card rounded-0 border-0">
+                <!-- <img v-bind:src="product.get_image1"> -->
+                <img v-bind:src="pictureHover" @mouseover="hover = true" @mouseleave="hover = false">
+                <div class="card-body mt-2 mx-3">
+                    <h2 class="h6">{{ product.name }}</h2>
+                    <p class="h6">₽ {{ product.price }}</p>
+                </div>
             </div>
         </router-link>
     </div>
@@ -16,24 +16,38 @@
 <script>
 export default {
     name: 'ProductBox',
+    data() {
+        return {
+            hover: false
+        }
+    },
     props: {
-        product: Object
+        product: Object,
+    },
+    computed: {
+        pictureHover () {
+            if (this.hover == true) {
+                return this.product.get_image2
+            } else {
+                return this.product.get_image1
+            }
+    }
     }
 }
 </script>
 
 <style scoped>
-
-.box {
+.card {
     height: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
 }
 
-  .image {
-    margin-top: -1.25rem;
-    margin-left: -1.25rem;
-    margin-right: -1.25rem;
-  }
+a {
+    text-decoration: none;
+}
+
+
+html, body {
+    /* Убирает прокрутку по горизонтале, для мобильной версии
+    overflow-x: hidden; */
+}
 </style>

@@ -1,86 +1,93 @@
 <template>
-    <div class="page-product">
-        <div class="columns">
-            <div class="column is-8">   
-                <div class="columns is-multiline is-gapless">
-                    <div class="column is-6">
-                        <figure class="image">
-                            <img v-bind:src="product.get_image1">
-                            <img v-bind:src="product.get_image3">
-                        </figure>
-                    </div>
+        <div class="container-fluid">
+            <div class="row">
+            <!-- col-sm-6 col-md-4 col-lg-3 mt-3 p-1 -->
+                <div class="col-8">
+                    <div class="row"> 
+                        <div class="col-lg-6 px-0">
+                            <div class="card rounded-0 border-0">
+                                <img v-bind:src="product.get_image1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <ModalImage v-bind:product="product" />
 
-                    <div class="column is-6">
-                        <figure class="image mb-6">
-                            <img v-bind:src="product.get_image2">
-                            <img v-bind:src="product.get_image4">
-                        </figure>
+                                <img v-bind:src="product.get_image3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <ModalImage v-bind:product="product" />
+                            </div>
+                        </div>
+                        <div class="col-lg-6 px-0">
+                            <div class="card rounded-0 border-0">
+                                <img v-bind:src="product.get_image2" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <ModalImage v-bind:product="product" />
+
+                                <img v-bind:src="product.get_image4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <ModalImage v-bind:product="product" />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="column is-4">   
-                <h1 class="title is-size-3">{{ product.name }}</h1>
-                <h3 class="title is-size-4">Цена: {{ product.price }} ₽</h3>
 
-                <template v-if="availableProductSize">
-                    <div class="tabs is-toggle">
-                        <ul>
-                            <li v-for="size in product.available_product_size" v-bind:class="{ 'is-active': isActive == size.size_name }">
-                                <a v-on:click="isActive = size.size_name">
-                                    {{ size.size_name }}
-                                </a>
-                            </li>
-                        </ul>
+                <div class="col-4"> 
+                    <h1 class="">{{ product.name }}</h1>
+                    <h3 class="">Цена: {{ product.price }} ₽</h3>
+
+                    <template v-if="availableProductSize">
+
+                        <div class="list-group list-group-horizontal mb-3">
+                            <a href="#" v-for = "size in product.available_product_size" class="list-group-item" v-bind:class="{ 'active' : isSelected(size.size_name) }" v-on:click="selected = size.size_name"> {{ size.size_name }}</a>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
+                            <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
+                            <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
+                            <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
+                        </div>
+                            </div>
+                            <div class="col-8">
+                            </div>
+                        </div>
+
+                        <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
+                            <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
+                            <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
+                            <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <button type="button" class="btn btn-dark" @click="addToCart()">Добавить в корзину</button> 
+                        </div>
+                        
+                    </template>
+                    <template v-else>
+                        <span class="title is-4">Нет в наличии</span>
+                    </template>
+                    
+                    <div>
+                        <div class="divider">Информация</div>
                     </div>
 
-                    <div class="columns is-mobile is-gapless">
-                        <div class="column mr-1">
-                            <button class="button is-outlined is-dark" @click="quantityMinus"><font-awesome-icon icon="fa-solid fa-minus"/></button>
-                        </div>
-                        <div class="column is-2">
-                            <input class="input " min="1" v-model="quantity">
-                        </div>
-                        <div class="column ml-1">
-                            <button class="button is-outlined is-dark" @click="quantityPlus"><font-awesome-icon icon="fa-solid fa-plus" /> </button>
-                        </div>
-                        <div class="column is-8">
-                        </div>
-                    </div>
-                    <div class="field has-addons mt-2">
-                        <div class="control">
-                            <a class="button is-outlined is-dark" @click="addToCart()">Добавить в корзину</a>
-                        </div>
-                    </div>
-
-                </template>
-                <template v-else>
-                    <span class="title is-4">Нет в наличии</span>
-                </template>
-                
-                <div>
-                    <div class="divider">Информация</div>
+                    <p class="mb-1"><span class="title is-6">Описание: </span>Эта футболка из мягкого хлопкового джерси, сочетающая визуальные признаки вечной роскоши с
+                    современной графической привлекательностью, украшена фирменным логотипом amiri и мотивом ma
+                    в сезонном градиенте. этот чай является культовой эмблемой мира и прекрасно сочетается с
+                    домашней джинсовой одеждой, брюками или шортами.</p>
+                    <p class="mb-1"><span class="title is-6">Коллекция: </span>до весны 2024 года</p>
+                    <p class="mb-1"><span class="title is-6">Производство: </span>сделано в италии</p>
+                    <p class="mb-1"><span class="title is-6">Состав: </span>100% хлопок</p>
                 </div>
-
-                <p class="mb-1"><span class="title is-6">Описание: </span>Эта футболка из мягкого хлопкового джерси, сочетающая визуальные признаки вечной роскоши с
-                современной графической привлекательностью, украшена фирменным логотипом amiri и мотивом ma
-                в сезонном градиенте. этот чай является культовой эмблемой мира и прекрасно сочетается с
-                домашней джинсовой одеждой, брюками или шортами.</p>
-                <p class="mb-1"><span class="title is-6">Коллекция: </span>до весны 2024 года</p>
-                <p class="mb-1"><span class="title is-6">Производство: </span>сделано в италии</p>
-                <p class="mb-1"><span class="title is-6">Состав: </span>100% хлопок</p>
             </div>
         </div>
-    </div>
 </template>
+
 
 <script>
 import axios from 'axios'
-import { toast } from 'bulma-toast'
+import ModalImage from '@/components/ModalImage'
 
 export default {
     name: 'Product',
     data() {
         return {
+            selected: 0,
             isActive: 'L',
             product: {
                 id : 0,
@@ -96,19 +103,23 @@ export default {
             quantity: 1
         }
     },
+    components: {
+        ModalImage
+    },
     mounted() {
         this.getProduct() 
     },
     computed: {
         availableProductSize() {
-            console.log(this.product.available_product_size)
-            console.log(this.product.available_product_size.length)
             if (this.product.available_product_size.length > 0) {
                 return true
             }
         }
     },
     methods: {
+        isSelected: function (i) {
+            return i === this.selected
+        },
         quantityPlus() {
             this.quantity += 1
         },
@@ -117,8 +128,6 @@ export default {
         },
 
         async getProduct() {
-            // this.$store.commit('setIsLoading', true)
-
             const big_category_slug = this.$route.params.big_category_slug
             const category_slug = this.$route.params.category_slug
             const product_slug = this.$route.params.product_slug
@@ -133,8 +142,6 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
-            
-            // this.$store.commit('setIsLoading', false)
         },
         addToCart() {
             if (isNaN(this.quantity) || this.quantity < 1) {
@@ -148,15 +155,6 @@ export default {
             }
 
             this.$store.commit('addToCart', item)
-
-            toast({
-                message: 'Продукт добавлен в корзину',
-                type: 'is-success',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: 'bottom-right',
-            })
         }
     }
 }
@@ -164,35 +162,23 @@ export default {
 
 
 <style lang="scss">
-@import '../../../node_modules/bulma';
-@import '../../../node_modules/~@creativebulma/bulma-divider';
-.tabs.is-toggle li.is-active a {
-  background-color: #333;
-  color: #fff;
-}
 
-.button.is-dark.is-outlined:focus{
-    background-color: transparent;
-    border-color: hsl(0, 0%, 21%);
-    color: hsl(0, 0%, 21%);
-}
-
-.button.is-dark.is-outlined:active{
-    background-color: transparent;
-    border-color: hsl(0, 0%, 21%);
-    color: hsl(0, 0%, 21%);
-}
-
-
-.input {
-    background-color: hsl(0, 0%, 100%);
+.list-group-item.active {
+    color: #fff;
+    background-color: #333;
     border-color: #333;
-    border-radius: 4px;
-    color: hsl(0, 0%, 21%);
 }
 
-span {
-    color: #333
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
 
 </style>

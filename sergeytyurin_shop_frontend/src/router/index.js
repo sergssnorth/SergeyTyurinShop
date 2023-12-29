@@ -11,7 +11,6 @@ import Category from '../views/user/Category.vue'
 import AboutUs from '../views/user/AboutUs.vue'
 import MyAccount from '../views/user/MyAccount.vue'
 
-
 const routes = [
   {
     path: '/admin',
@@ -81,6 +80,5 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-
 
 export default router
