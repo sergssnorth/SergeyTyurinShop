@@ -1,16 +1,15 @@
 <template>
-    <tr>
-        <td><router-link :to="item.product.get_absolute_url"><span>{{ item.product.name }}</span></router-link></td>
-        <td>{{ item.size }}</td>
-        <td>{{ item.product.price }} ₽</td>
-        <td>
-            <a @click="decrementQuantity(item)"><span class="mr-1"><i class="bi bi-dash-circle"></i></span></a>
-            {{ item.quantity }}
-            <a @click="incrementQuantity(item)"><span class="ml-1"><i class="bi bi-plus-circle"></i></span></a>
-        </td>
-        <td>{{ getItemTotal(item).toFixed(2) }} ₽</td>
-        <td><button class="delete" @click="removeFromCart(item)"></button></td>
-    </tr>
+    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 px-1">
+        <router-link v-bind:to="item.product.get_absolute_url">
+            <div class="card rounded-0 border-0">
+                <img v-bind:src="pictureHover" @mouseover="hover = true" @mouseleave="hover = false">
+                <div class="card-body mt-2 mx-3">
+                    <h2 class="h6">{{ item.product.name }}</h2>
+                    <p class="h6">₽ {{ item.product.price }}</p>
+                </div>
+            </div>
+        </router-link>
+    </div>
 </template>
 
 <script>
@@ -21,7 +20,8 @@ export default {
     },
     data() {
         return {
-            item: this.initialItem
+            item: this.initialItem,
+            hover: false
         }
     },
     methods: {
@@ -50,5 +50,15 @@ export default {
             this.updateCart()
         },
     },
+    computed: {
+        pictureHover () {
+            if (this.hover == true) {
+                return this.item.product.get_image2
+            } else {
+                return this.item.product.get_image1
+            }
+        }
+    }
+
 }
 </script>

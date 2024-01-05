@@ -2,7 +2,6 @@
     <div class="col-sm-6 col-md-4 col-lg-3 mb-3 px-1">
         <router-link v-bind:to="product.get_absolute_url">
             <div class="card rounded-0 border-0">
-                <!-- <img v-bind:src="product.get_image1"> -->
                 <img v-bind:src="pictureHover" @mouseover="hover = true" @mouseleave="hover = false">
                 <div class="card-body mt-2 mx-3">
                     <h2 class="h6">{{ product.name }}</h2>
@@ -31,7 +30,7 @@ export default {
             } else {
                 return this.product.get_image1
             }
-    }
+        }
     }
 }
 </script>

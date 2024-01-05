@@ -5,6 +5,9 @@ export default createStore({
     cart: {
         items: [],
     },
+    favorite: {
+      items: [],
+    },
     isAuthenticated: false,
     token: '',
     isLoading: false
@@ -15,6 +18,12 @@ export default createStore({
         state.cart = JSON.parse(localStorage.getItem('cart'))
       } else {
         localStorage.setItem('cart', JSON.stringify(state.cart))
+      }
+
+      if (localStorage.getItem('favorite')) {
+        state.favorite = JSON.parse(localStorage.getItem('favorite'))
+      } else {
+        localStorage.setItem('favorite', JSON.stringify(state.favorite))
       }
 
       if (localStorage.getItem('token')) {
@@ -32,8 +41,16 @@ export default createStore({
       } else {
         state.cart.items.push(item)
       }
-
       localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
+    addToFavorite(state, item) {
+      const exists = state.favorite.items.filter(i => i.product.id === item.product.id)
+      if (exists.length) {
+        console.log("Уже есть")
+      } else {
+        state.favorite.items.push(item)
+      }
+      localStorage.setItem('favorite', JSON.stringify(state.favorite))
     },
     setIsLoading(state, status) {
       state.isLoading = status
@@ -48,8 +65,11 @@ export default createStore({
     },
     clearCart(state) {
       state.cart = { items: [] }
-
       localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
+    clearFavorite(state, item) {
+      state.favorite = { items: [] }
+      localStorage.setItem('favorite', JSON.stringify(state.favorite))
     },
   },
   actions: {

@@ -1,7 +1,6 @@
 <template>
         <div class="container-fluid">
             <div class="row">
-            <!-- col-sm-6 col-md-4 col-lg-3 mt-3 p-1 -->
                 <div class="col-8">
                     <div class="row"> 
                         <div class="col-lg-6 px-0">
@@ -35,7 +34,7 @@
                             <a href="#" v-for = "size in product.available_product_size" class="list-group-item" v-bind:class="{ 'active' : isSelected(size.size_name) }" v-on:click="selected = size.size_name"> {{ size.size_name }}</a>
                         </div>
 
-                        <div class="row">
+                        <div class="row  p-0">
                             <div class="col-4">
                                 <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
                             <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
@@ -46,16 +45,11 @@
                             <div class="col-8">
                             </div>
                         </div>
-
-                        <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
-                            <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
-                            <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
-                            <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <button type="button" class="btn btn-dark" @click="addToCart()">Добавить в корзину</button> 
-                        </div>
+                        
+                        
+                            <button type="button" class="btn btn-dark" @click="addToCart()">Добавить в корзину</button>
+                            <button type="button" class="btn" style="outline: 0 !important"><i class="bi bi-heart mx-3" @click="addToFavorite()" style="font-size: 20px"></i></button>
+                        
                         
                     </template>
                     <template v-else>
@@ -155,6 +149,12 @@ export default {
             }
 
             this.$store.commit('addToCart', item)
+        },
+        addToFavorite() {
+            const item = {
+                product: this.product,
+            }
+            this.$store.commit('addToFavorite', item)
         }
     }
 }
@@ -162,6 +162,10 @@ export default {
 
 
 <style lang="scss">
+button:focus {
+  outline:  0 !important;
+  border:none;
+}
 
 .list-group-item.active {
     color: #fff;

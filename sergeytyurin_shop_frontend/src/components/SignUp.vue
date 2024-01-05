@@ -16,13 +16,13 @@
                                 <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
                                 <label for="floatingPassword">Пароль</label>
                             </div>
-                            
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Войти</button>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Повторите пароль</label>
                             </div>
+        
+                            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
                             </form>
-
-                            <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
                     </div>
                 </div>
 
@@ -35,22 +35,18 @@
 import axios from 'axios'
 
 export default {
-    name: '',
+    name: 'SignUp',
     data() {
         return {
             username: '',
             password: '',
+            password2: '',
             errors: []
         }
     },
-    mounted() {
-        document.title = 'Log In | Djackets'
-    },
     methods: {
-        async submitForm() {
+        submitForm() {
             this.errors = []
-            axios.defaults.headers.common["Authorization"] = ""
-            localStorage.removeItem("token")
 
             if (this.username === '') {
                 this.errors.push('Поле логин не заполнено!')
@@ -60,37 +56,36 @@ export default {
                 this.errors.push('Поле пароль не заполнено!')
             }
 
+            if (this.password2 === '') {
+                this.errors.push('Поле поворите пароль не заполнено!')
+            }
+
+
+            if (this.password !== this.password2) {
+                this.errors.push('Поле пароль и повторите пароль не заполнено!')
+            }
+
             if (!this.errors.length) {
                 const formData = {
                     username: this.username,
                     password: this.password
                 }
 
-                console.log(formData)
-                
-                await axios
-                    .post("/api/v1/token/login/", formData)
+                axios
+                    .post("/api/v1/users/", formData)
                     .then(response => {
-                        console.log(response)
-                        const auth_token = response.data.auth_token
-
-                        this.$store.commit('setToken', auth_token)
-                        
-                        axios.defaults.headers.common["Authorization"] = "Token " + auth_token
-
-                        localStorage.setItem("token", auth_token)
-
-                        const toPath = this.$route.query.to || '/'
-
-                        this.$router.push(toPath)
+                        this.$router.push('/log-in')
                     })
                     .catch(error => {
                         if (error.response) {
                             for (const property in error.response.data) {
                                 this.errors.push(`${property}: ${error.response.data[property]}`)
                             }
-                        } else {
+
+                            console.log(JSON.stringify(error.response.data))
+                        } else if (error.message) {
                             this.errors.push('Something went wrong. Please try again')
+                            
                             console.log(JSON.stringify(error))
                         }
                     })
