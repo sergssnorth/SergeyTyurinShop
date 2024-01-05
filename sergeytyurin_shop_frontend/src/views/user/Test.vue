@@ -1,0 +1,24 @@
+<template>
+    <div class="container-fluid">
+        <div class="d-block d-sm-none">Видно только на xs</div>
+        <div class="d-none d-sm-block d-md-none">Видно только на sm</div>
+        <div class="d-block d-none d-md-block d-lg-none">Видно только на md</div>
+        <div class="d-block d-none d-lg-block d-xl-none">Видно только на lg</div>
+        <div class="d-block d-none d-xl-block d-xxl-none">Видно только на xl</div>
+        <div class="d-none d-xl-block d-xxl-none">Видно только на xxl</div>
+        <div class="d-none d-sm-block">Видно на всех</div>
+    </div>
+</template>
+
+
+<script>
+export default {
+    name: 'Test',
+    data() {
+        return {
+            
+        }
+    },
+}
+
+</script>

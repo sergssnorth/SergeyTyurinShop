@@ -11,6 +11,7 @@ import Payment from '../views/user/Payment.vue'
 import Category from '../views/user/Category.vue'
 import AboutUs from '../views/user/AboutUs.vue'
 import MyAccount from '../views/user/MyAccount.vue'
+import Test from '../views/user/Test.vue'
 
 const routes = [
   {
@@ -70,6 +71,11 @@ const routes = [
     path: '/my-account',
     name: 'MyAccount',
     component: MyAccount
+  },
+  {
+    path: '/test',
+    name: 'Test',
+    component: Test
   },
 
 ]
