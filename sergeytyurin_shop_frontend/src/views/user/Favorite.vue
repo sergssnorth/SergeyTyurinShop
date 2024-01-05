@@ -1,12 +1,10 @@
 <template>
-    <div class="row mx-3">
-
-            <FavoriteItem
-                v-for="item in favorite.items"
-                    v-bind:key="item.product.id"
-                    v-bind:initialItem="item"
-                    v-on:removeFromCart="removeFromCart" />
-
+    <div class="row mx-0">
+        <FavoriteItem
+            v-for="item in favorite.items"
+            v-bind:key="item.product.id"
+            v-bind:initialItem="item"
+            v-on:removeFromCart="removeFromCart" />
     </div>
 </template>
 

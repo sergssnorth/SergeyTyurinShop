@@ -1,5 +1,5 @@
 <template>
-    <div class="row mx-3 mt-4">
+    <div class="row">
         <ProductBox 
           v-for="product in products"
           v-bind:key="product.id"

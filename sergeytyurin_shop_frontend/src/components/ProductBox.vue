@@ -36,6 +36,12 @@ export default {
 </script>
 
 <style scoped>
+
+.px-1 {
+    padding-right: 0.1rem !important;
+    padding-left: 0.1rem !important;
+}
+
 .card {
     height: 100%;
 }

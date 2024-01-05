@@ -8,8 +8,8 @@
 
             <div class="d-lg-none">
                 <router-link to="/">
-                    <a class="navbar-brand" href="#" style="margin-right: 0">
-                        <img src="@/assets/ShortLogo.png" width="46" height="28">
+                    <a class="navbar-brand" href="#" style="padding: 0; margin: 0;">
+                        <img src="@/assets/ShortLogo.png" width="80" height="32">
                     </a>
                 </router-link>
             </div>
@@ -61,7 +61,7 @@
 
                     <template v-if="favoriteTotalLength > 0">
                         <router-link to="/favorite">
-                            <i class="px-2 bi bi-bookmark-heart position-relative" style="font-size: 24px">
+                            <i class="px-2 bi bi-bookmark-heart-fill position-relative" style="font-size: 24px">
                                 <span class="badge position-absolute bottom-0 start-85 translate-middle bg-danger border border-light rounded-circle">
                                     {{ favoriteTotalLength }}
                                     <span class="visually-hidden">unread messages</span>
@@ -79,7 +79,7 @@
 
                     <template v-if="cartTotalLength > 0">
                         <router-link to="/cart">
-                            <i class="px-2 bi bi-bag position-relative" style="font-size: 24px">
+                            <i class="px-2 bi bi-bag-fill position-relative" style="font-size: 24px">
                                 <span class="badge position-absolute top-10 start-55 translate-middle-x rounded-pill bg-danger border border-light rounded-circle">
                                     {{ cartTotalLength }}
                                     <span class="visually-hidden">unread messages</span>
@@ -214,12 +214,21 @@ export default {
 @import "../node_modules/bootstrap/scss/variables-dark";
 
 
-body { padding-top: 73px; }
+body { padding-top: 72px; }
+
+nav {
+    min-height: 72px;
+}
 
 i {
     font-style: normal;
 }
 
+a.dropdown-item {
+    color: #000;
+    text-decoration: none;
+
+}
 span.badge {
     --bs-badge-font-size: 0.5em;
     --bs-badge-font-weight: 700;

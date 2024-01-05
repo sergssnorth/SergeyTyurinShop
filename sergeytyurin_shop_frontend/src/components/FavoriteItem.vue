@@ -3,7 +3,7 @@
         <router-link v-bind:to="item.product.get_absolute_url">
             <div class="card rounded-0 border-0">
                 <img v-bind:src="pictureHover" @mouseover="hover = true" @mouseleave="hover = false">
-                <div class="card-body mt-2 mx-3">
+                <div class="card-body">
                     <h2 class="h6">{{ item.product.name }}</h2>
                     <p class="h6">₽ {{ item.product.price }}</p>
                 </div>
