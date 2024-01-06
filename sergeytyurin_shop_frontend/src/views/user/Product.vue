@@ -1,6 +1,69 @@
 <template>
         <div class="container-fluid">
-            <div class="d-block d-sm-none">Видно только на xs</div>
+            <div class="d-block d-sm-none">
+                <div class="row pb-3">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide px-0" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img v-bind:src="product.get_image1" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img v-bind:src="product.get_image2" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img v-bind:src="product.get_image3" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img v-bind:src="product.get_image4" class="d-block w-100" alt="...">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <h1 class="">{{ product.name }}</h1>
+                    <h3 class="">Цена: {{ product.price }} ₽</h3>
+
+
+                    <template v-if="availableProductSize">
+                        <div class="list-group list-group-horizontal mb-3">
+                            <a href="#" v-for = "size in product.available_product_size" class="list-group-item" v-bind:class="{ 'active' : isSelected(size.size_name) }" v-on:click="selected = size.size_name"> {{ size.size_name }}</a>
+                        </div>
+
+                        <div class="row  p-0">
+                                <div class="col-4">
+                                    <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
+                                        <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
+                                        <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
+                                        <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                </div>
+                        </div>
+
+                        <button type="button" class="btn btn-dark" @click="addToCart()">Добавить в корзину</button>
+                        <button type="button" class="btn" style="outline: 0 !important"><i class="bi bi-heart mx-3" @click="addToFavorite()" style="font-size: 20px"></i></button>
+
+
+                    </template>
+                    <template v-else>
+                        <span class="title is-4">Нет в наличии</span>
+                    </template>
+
+                    <div>
+                    <div class="divider">Информация</div>
+                    </div>
+
+                    <p class="mb-1"><span class="title is-6">Описание: </span>Эта футболка из мягкого хлопкового джерси, сочетающая визуальные признаки вечной роскоши с
+                        современной графической привлекательностью, украшена фирменным логотипом amiri и мотивом ma
+                        в сезонном градиенте. этот чай является культовой эмблемой мира и прекрасно сочетается с
+                        домашней джинсовой одеждой, брюками или шортами.</p>
+                    <p class="mb-1"><span class="title is-6">Коллекция: </span>до весны 2024 года</p>
+                    <p class="mb-1"><span class="title is-6">Производство: </span>сделано в италии</p>
+                    <p class="mb-1"><span class="title is-6">Состав: </span>100% хлопок</p>
+                </div>
+            </div>
             <div class="d-none d-sm-block">
                 <div class="row">
                     <div class="col-8">
@@ -35,22 +98,56 @@
                             <div class="list-group list-group-horizontal mb-3">
                                 <a href="#" v-for = "size in product.available_product_size" class="list-group-item" v-bind:class="{ 'active' : isSelected(size.size_name) }" v-on:click="selected = size.size_name"> {{ size.size_name }}</a>
                             </div>
+                            
 
-                            <div class="row  p-0">
-                                <div class="col-4">
-                                    <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
-                                <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
-                                <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
-                                <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
-                            </div>
+                            <div class="d-block d-sm-none">Видно только на xs</div>
+                            <div class="d-none d-sm-block d-md-none">Видно только на sm</div>
+                            <div class="d-block d-none d-md-block d-lg-none"><!-- На md -->
+                                <div class="row  p-0">
+                                    <div class="col-7">
+                                        <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
+                                            <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
+                                            <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
+                                            <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+                                    </div>
                                 </div>
-                                <div class="col-8">
+                            </div>
+                            <div class="d-block d-none d-lg-block d-xl-none"><!-- На lg -->
+                                <div class="row  p-0">
+                                    <div class="col-5">
+                                        <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
+                                            <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
+                                            <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
+                                            <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                    </div>
                                 </div>
                             </div>
+                        
+
+                            <div class="d-none d-sm-block d-lg-none d-xl-block d-md-none d-lg-block"> <!-- На больших экранах -->
+                                <div class="row  p-0">
+                                    <div class="col-4">
+                                        <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
+                                            <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
+                                            <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
+                                            <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="col-8">
+                                    </div>
+                                </div>
+                            </div>
+
                             
                             
-                                <button type="button" class="btn btn-dark" @click="addToCart()">Добавить в корзину</button>
-                                <button type="button" class="btn" style="outline: 0 !important"><i class="bi bi-heart mx-3" @click="addToFavorite()" style="font-size: 20px"></i></button>
+                            <button type="button" class="btn btn-dark" @click="addToCart()">Добавить в корзину</button>
+                            <button type="button" class="btn" style="outline: 0 !important"><i class="bi bi-heart mx-3" @click="addToFavorite()" style="font-size: 20px"></i></button>
                             
                             
                         </template>
