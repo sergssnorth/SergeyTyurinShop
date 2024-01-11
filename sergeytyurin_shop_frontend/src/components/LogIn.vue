@@ -1,31 +1,32 @@
 <template>
     <div class="container-fluid">
-        <div class="row justify-content-center d-flex align-items-center min-vh-100">
+        <!-- <div class="row justify-content-center d-flex align-items-center min-vh-100"> -->
+        <div class="row justify-content-center mt-5">
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form @submit.prevent="submitForm" class="mb-3">
                             <div class="text-center">
                                 <h1>Вход</h1>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <input type="" class="form-control" id="floatingInput" placeholder="name@example.com" v-model="username">
                                 <label for="floatingInput">Логин</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="password">
                                 <label for="floatingPassword">Пароль</label>
                             </div>
                             
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-primary">Войти</button>
+                            <div class="d-grid text-center">
+                                <button type="submit" class="btn btn-dark">Войти</button>
                             </div>
-                            </form>
+                        </form>
 
-                            <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
+                        <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
                     </div>
                 </div>
-
+            
             </div>
         </div>
     </div>
@@ -105,4 +106,15 @@ export default {
 .row {
     padding-bottom: 10rem;
 }
+ 
+.card-body a {
+    color: #333;
+    text-decoration: none;
+}
+.card-body p {
+    color: gray;
+    text-decoration: none;
+}
+
+
 </style>

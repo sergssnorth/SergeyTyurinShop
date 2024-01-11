@@ -10,7 +10,8 @@ export default createStore({
     },
     isAuthenticated: false,
     token: '',
-    isLoading: false
+    isLoading: false,
+    activeHeart: false,
   },
   mutations: {
     initializeStore(state) {
@@ -52,6 +53,20 @@ export default createStore({
       }
       localStorage.setItem('favorite', JSON.stringify(state.favorite))
     },
+
+      actionToFavorite(state, item) {
+      const exists = state.favorite.items.filter(i => i.product.id === item.product.id)
+      if (exists.length) {
+        const newItems = state.favorite.items.filter(i => i.product.id !== item.product.id)
+        state.favorite.items = newItems
+        localStorage.setItem('favorite', JSON.stringify(state.favorite))
+
+      } else {
+        state.favorite.items.push(item)
+        localStorage.setItem('favorite', JSON.stringify(state.favorite))
+      }
+    },
+
     setIsLoading(state, status) {
       state.isLoading = status
     },

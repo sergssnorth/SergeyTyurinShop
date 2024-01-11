@@ -1,28 +1,61 @@
 <template>
-    <nav class="navbar fixed-top navbar-expand-lg shadow-sm p-3 mb-5 bg-body">
-        <div class="container-fluid justify-content-between">
+    <nav class="navbar fixed-top navbar-expand-lg shadow-sm px-3 mb-5 bg-body">
+        <div class="container-fluid px-0 justify-content-between">
             
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCategories" aria-controls="navbarCategories" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi bi-heart" style="font-size: 20px"></i>
-            </button>
+            <div class="d-lg-none d-flex align-items-center">
+                <button class="navbar-toggler" type="button" @click = "turnOnNavbar" data-bs-toggle="collapse" data-bs-target="#navbarCategories" aria-controls="navbarCategories" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-heart" style="font-size: 20px"></i>
+                </button>
+                <router-link to="/my-account">
+                    <i class="px-2 bi bi-person-circle" style="font-size: 24px"></i>
+                </router-link>
+            </div>
+            
 
             <div class="d-lg-none">
                 <router-link to="/">
                     <a class="navbar-brand" href="#" style="padding: 0; margin: 0;">
-                        <img src="@/assets/ShortLogo.png" width="80" height="32">
+                        <img src="@/assets/ShortLogo.png" width="89" height="28">
                     </a>
                 </router-link>
             </div>
 
             <div class="d-lg-none">
                 <div class="">
-                    <router-link to="/favorite">
-                        <i class="px-2 bi bi-person-circle" style="font-size: 24px"></i>
-                    </router-link>
+                    <template v-if="favoriteTotalLength > 0">
+                        <router-link to="/favorite">
+                            <i class="px-2 bi bi-bookmark-heart position-relative" style="font-size: 24px">
+                                <span class="badge position-absolute bottom-0 start-85 translate-middle bg-dark border border-light rounded-circle">
+                                    {{ favoriteTotalLength }}
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </i>
+                        </router-link>
+                    </template>
+                    
+                    <template v-else>
+                        <router-link to="/favorite">
+                            <i class="px-2 bi bi-bookmark-heart" style="font-size: 24px"></i>
+                        </router-link>
+                    </template>
+    
 
-                    <router-link to="/cart">
-                        <i class="px-2 bi bi-bag" style="font-size: 24px"></i>
-                    </router-link>
+                    <template v-if="cartTotalLength > 0">
+                        <router-link to="/cart">
+                            <i class="px-2 bi bi-bag position-relative" style="font-size: 24px">
+                                <span class="badge position-absolute top-10 start-55 translate-middle-x rounded-pill bg-dark border border-light rounded-circle">
+                                    {{ cartTotalLength }}
+                                    <span class="visually-hidden">unread messages</span>
+                                </span>
+                            </i>
+                        </router-link>
+                    </template>
+
+                    <template v-else>
+                        <router-link to="/cart">
+                            <i class="px-2 bi bi-bag" style="font-size: 24px"></i>
+                        </router-link>
+                    </template>
                 </div>
             </div>
 
@@ -61,8 +94,8 @@
 
                     <template v-if="favoriteTotalLength > 0">
                         <router-link to="/favorite">
-                            <i class="px-2 bi bi-bookmark-heart-fill position-relative" style="font-size: 24px">
-                                <span class="badge position-absolute bottom-0 start-85 translate-middle bg-danger border border-light rounded-circle">
+                            <i class="px-2 bi bi-bookmark-heart position-relative" style="font-size: 24px">
+                                <span class="badge position-absolute bottom-0 start-85 translate-middle bg-dark border border-light rounded-circle">
                                     {{ favoriteTotalLength }}
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
@@ -79,8 +112,8 @@
 
                     <template v-if="cartTotalLength > 0">
                         <router-link to="/cart">
-                            <i class="px-2 bi bi-bag-fill position-relative" style="font-size: 24px">
-                                <span class="badge position-absolute top-10 start-55 translate-middle-x rounded-pill bg-danger border border-light rounded-circle">
+                            <i class="px-2 bi bi-bag position-relative" style="font-size: 24px">
+                                <span class="badge position-absolute top-10 start-55 translate-middle-x rounded-pill bg-dark border border-light rounded-circle">
                                     {{ cartTotalLength }}
                                     <span class="visually-hidden">unread messages</span>
                                 </span>
@@ -98,10 +131,74 @@
         </div>
     </nav>
 
+
     <section class="section is-spaced" style="">
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div id="registrationToast" class="toast text-bg-dark" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
+                <div class="toast-header">
+                <strong class="me-auto">Сергей Тюрин</strong>
+                <small>Сейчас</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Вы успешно зарегистрировались!
+                </div>
+            </div>
+        </div>
+
+
+        
       <router-view/>
     </section>
+    
+    <div class="container">
+        <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 border-top">
+            <div class="col mb-3">
+            <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+            </a>
+            <p class="text-body-secondary">&copy; 2023</p>
+            </div>
 
+            <div class="col mb-3">
+
+            </div>
+
+            <div class="col mb-3">
+            <h5>Section</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+            </ul>
+            </div>
+
+            <div class="col mb-3">
+            <h5>Section</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+            </ul>
+            </div>
+
+            <div class="col mb-3">
+            <h5>Section</h5>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
+            </ul>
+            </div>
+        </footer>
+        </div>
+    
 </template>
 
 <script>
@@ -110,6 +207,7 @@ import axios from 'axios'
 export default {
     data() {
         return {
+            visibleNavbar: false,
             showCategoryMen: false,
             showMobileMenu: false,
             cart: {
@@ -120,6 +218,7 @@ export default {
             },
             big_categories: [],
             categories: [],
+
         }
     },
     beforeCreate() {
@@ -167,7 +266,10 @@ export default {
         }
     },
     methods: {
-      async getBigCategories() {
+        turnOnNavbar() {
+            this.visibleNavbar = !this.visibleNavbar
+        },
+        async getBigCategories() {
             this.$store.commit('setIsLoading', true)
             await axios
                 .get('/api/v1/big-categories/')
@@ -216,6 +318,19 @@ export default {
 
 body { padding-top: 72px; }
 
+@media (max-width: 991px) {
+    nav.navbar {
+        min-height: 52px;
+        --bs-navbar-toggler-focus-width: 0.10rem;
+    }
+
+    body { padding-top: 52px; }
+
+
+}
+
+
+
 nav {
     min-height: 72px;
 }
@@ -227,8 +342,20 @@ i {
 a.dropdown-item {
     color: #000;
     text-decoration: none;
-
 }
+
+a.dropdown-item:active {
+    color: #000;
+    background-color: white;
+    text-decoration: none;
+}
+
+a.dropdown-item a{
+    color: #000;
+    text-decoration: none;
+}
+
+
 span.badge {
     --bs-badge-font-size: 0.5em;
     --bs-badge-font-weight: 700;

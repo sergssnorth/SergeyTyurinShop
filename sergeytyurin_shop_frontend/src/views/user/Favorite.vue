@@ -1,5 +1,6 @@
 <template>
     <div class="row mx-0">
+        <h1 class="my-3 text-center">Избранное</h1>
         <FavoriteItem
             v-for="item in favorite.items"
             v-bind:key="item.product.id"
@@ -55,3 +56,10 @@ export default {
     }
 }
 </script>
+
+
+<style lang="scss">
+a {
+    text-decoration: none;
+}
+</style>

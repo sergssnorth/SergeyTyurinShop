@@ -5,6 +5,7 @@ import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import { Toast } from 'bootstrap/dist/js/bootstrap.js'
 import axios from 'axios'
 
 axios.defaults.baseURL = "http://127.0.0.1:8000"

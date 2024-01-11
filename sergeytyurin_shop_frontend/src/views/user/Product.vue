@@ -26,7 +26,7 @@
 
 
                     <template v-if="availableProductSize">
-                        <div class="list-group list-group-horizontal mb-3">
+                        <div class="list-group list-group-horizontal px-2 mb-3">
                             <a href="#" v-for = "size in product.available_product_size" class="list-group-item" v-bind:class="{ 'active' : isSelected(size.size_name) }" v-on:click="selected = size.size_name"> {{ size.size_name }}</a>
                         </div>
 
@@ -52,7 +52,7 @@
                     </template>
 
                     <div>
-                    <div class="divider">Информация</div>
+                    <p class="">Информация:</p>
                     </div>
 
                     <p class="mb-1"><span class="title is-6">Описание: </span>Эта футболка из мягкого хлопкового джерси, сочетающая визуальные признаки вечной роскоши с
@@ -65,9 +65,9 @@
                 </div>
             </div>
             <div class="d-none d-sm-block">
-                <div class="row">
+                <div class="row pb-0">
                     <div class="col-8">
-                        <div class="row"> 
+                        <div class="row pb-0"> 
                             <div class="col-lg-6 px-0">
                                 <div class="card rounded-0 border-0">
                                     <img v-bind:src="product.get_image1" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -89,20 +89,20 @@
                         </div>
                     </div>
 
-                    <div class="col-4"> 
+                    <div class="col-4" style="margin-top: 1rem;"> 
+                        <div class="" style="margin-bottom: 2rem;">
+
                         <h1 class="">{{ product.name }}</h1>
-                        <h3 class="">Цена: {{ product.price }} ₽</h3>
+                        <p class="fs-4">Цена: {{ product.price }} ₽</p>
 
                         <template v-if="availableProductSize">
 
-                            <div class="list-group list-group-horizontal mb-3">
-                                <a href="#" v-for = "size in product.available_product_size" class="list-group-item" v-bind:class="{ 'active' : isSelected(size.size_name) }" v-on:click="selected = size.size_name"> {{ size.size_name }}</a>
+                            <div class="list-group list-group-horizontal mb-2">
+                                <a href="#" v-for = "size in product.available_product_size" class="list-group-item" style="" v-bind:class="{ 'active' : isSelected(size.size_name) }" v-on:click="selected = size.size_name"> {{ size.size_name }}</a>
                             </div>
                             
 
-                            <div class="d-block d-sm-none">Видно только на xs</div>
-                            <div class="d-none d-sm-block d-md-none">Видно только на sm</div>
-                            <div class="d-block d-none d-md-block d-lg-none"><!-- На md -->
+                            <div class="d-block d-none d-md-block d-lg-none mb-2"><!-- На md -->
                                 <div class="row  p-0">
                                     <div class="col-7">
                                         <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
@@ -115,7 +115,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-block d-none d-lg-block d-xl-none"><!-- На lg -->
+                            <div class="d-block d-none d-lg-block d-xl-none mb-2"><!-- На lg -->
                                 <div class="row  p-0">
                                     <div class="col-5">
                                         <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
@@ -130,10 +130,10 @@
                             </div>
                         
 
-                            <div class="d-none d-sm-block d-lg-none d-xl-block d-md-none d-lg-block"> <!-- На больших экранах -->
-                                <div class="row  p-0">
+                            <div class="d-none d-sm-block d-lg-none d-xl-block d-md-none d-lg-block mb-2"> <!-- На больших экранах -->
+                                <div class="row pb-0">
                                     <div class="col-4">
-                                        <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Basic outlined example">
+                                        <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
                                             <button type="button" @click="quantityMinus" class="btn"><i class="bi bi-dash-circle" style="font-size: 24px"></i></button>
                                             <input type="number" class="form-control border-0 text-center " v-model="quantity" aria-describedby="button-addon1">
                                             <button type="button" @click="quantityPlus" class="btn"><i class="bi bi-plus-circle" style="font-size: 24px"></i></button>
@@ -143,29 +143,31 @@
                                     </div>
                                 </div>
                             </div>
-
                             
-                            
-                            <button type="button" class="btn btn-dark" @click="addToCart()">Добавить в корзину</button>
-                            <button type="button" class="btn" style="outline: 0 !important"><i class="bi bi-heart mx-3" @click="addToFavorite()" style="font-size: 20px"></i></button>
-                            
+                            <button type="button" class="btn btn-dark mb-2" @click="addToCart()">Добавить в корзину</button>
+                            <template v-if="activeHeart">
+                                <button type="button" class="btn mx-2 mb-2" style="outline: 0 !important"><i class="bi bi-heart-fill px-1" @click="actionToFavorite()" style="font-size: 20px"></i></button>
+                            </template>
+                            <template v-else>
+                                <button type="button" class="btn mx-2 mb-2" style="outline: 0 !important"><i class="bi bi-heart px-1" @click="actionToFavorite()" style="font-size: 20px"></i></button>
+                            </template>
                             
                         </template>
                         <template v-else>
                             <span class="title is-4">Нет в наличии</span>
                         </template>
                         
-                        <div>
-                            <div class="divider">Информация</div>
                         </div>
 
-                        <p class="mb-1"><span class="title is-6">Описание: </span>Эта футболка из мягкого хлопкового джерси, сочетающая визуальные признаки вечной роскоши с
-                        современной графической привлекательностью, украшена фирменным логотипом amiri и мотивом ma
-                        в сезонном градиенте. этот чай является культовой эмблемой мира и прекрасно сочетается с
-                        домашней джинсовой одеждой, брюками или шортами.</p>
-                        <p class="mb-1"><span class="title is-6">Коллекция: </span>до весны 2024 года</p>
-                        <p class="mb-1"><span class="title is-6">Производство: </span>сделано в италии</p>
-                        <p class="mb-1"><span class="title is-6">Состав: </span>100% хлопок</p>
+                        <div>
+                            <p class="mb-1 fs-5 text">Информация:</p>
+                        </div>
+
+                        <p class="mb-2"><span class="title is-6">Описание: </span>Футболка из мягкого хлопкового джерси, сочетающая визуальные признаки вечной роскоши с
+                        современной графической привлекательностью, украшена фирменным логотипом amiri.</p>
+                        <p class="mb-2"><span class="title is-6">Коллекция: </span>до весны 2024 года</p>
+                        <p class="mb-2"><span class="title is-6">Производство: </span>сделано в италии</p>
+                        <p class="mb-2"><span class="title is-6">Состав: </span>100% хлопок</p>
                     </div>
                 </div>
             </div>
@@ -195,6 +197,9 @@ export default {
                 get_image4: "",
                 available_product_size: []
             },
+            favorite: {
+                items: []
+            },
             quantity: 1
         }
     },
@@ -203,13 +208,24 @@ export default {
     },
     mounted() {
         this.getProduct() 
+        this.favorite = this.$store.state.favorite
+    
     },
     computed: {
         availableProductSize() {
             if (this.product.available_product_size.length > 0) {
                 return true
             }
-        }
+        },
+        activeHeart() {
+            const item = {
+                product: this.product,
+            }
+            let results = this.favorite.items.filter(i => i.product.id === item.product.id)
+            if(results.length > 0){
+                return true
+            }
+        },
     },
     methods: {
         isSelected: function (i) {
@@ -245,11 +261,25 @@ export default {
 
             const item = {
                 product: this.product,
-                size: this.isActive,
+                size: this.selected,
                 quantity: this.quantity
             }
 
             this.$store.commit('addToCart', item)
+        },
+        actionToFavorite() {
+            const item = {
+                product: this.product,
+            }
+
+            // function Action(i) {
+            //     if(i.product.id !== item.product.id) {
+            //         return i
+            //     } 
+            // }
+            // this.favorite.items = this.favorite.items.filter(Action)
+            // localStorage.setItem('favorite', JSON.stringify(this.favorite.items))
+            this.$store.commit('actionToFavorite', item)
         },
         addToFavorite() {
             const item = {
@@ -263,27 +293,13 @@ export default {
 
 
 <style lang="scss">
-button:focus {
-  outline:  0 !important;
-  border:none;
-}
 
-.list-group-item.active {
+a.list-group-item.active {
     color: #fff;
     background-color: #333;
     border-color: #333;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-}
-
-input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
-}
 
 
 </style>

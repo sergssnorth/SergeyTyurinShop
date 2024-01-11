@@ -12,6 +12,7 @@ import Category from '../views/user/Category.vue'
 import AboutUs from '../views/user/AboutUs.vue'
 import MyAccount from '../views/user/MyAccount.vue'
 import Test from '../views/user/Test.vue'
+import Checkout from '../views/user/Checkout.vue'
 
 const routes = [
   {
@@ -76,6 +77,11 @@ const routes = [
     path: '/test',
     name: 'Test',
     component: Test
+  },
+  {
+    path: '/cart/checkout',
+    name: 'Checkout',
+    component: Checkout
   },
 
 ]

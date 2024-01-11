@@ -1,31 +1,44 @@
 <template>
     <div class="container-fluid">
-        <div class="row justify-content-center d-flex align-items-center min-vh-100">
+        <!-- <div class="row justify-content-center d-flex align-items-center min-vh-100"> -->
+        <div class="row justify-content-center mt-5">
             <div class="col-4">
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form @submit.prevent="submitForm" class="mb-3">
                             <div class="text-center">
-                                <h1>Вход</h1>
+                                <h1>Регистрация</h1>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <input type="" class="form-control"  placeholder="name@example.com" v-model="username">
                                 <label for="floatingInput">Логин</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input type="password" class="form-control" placeholder="Password" v-model="password">
                                 <label for="floatingPassword">Пароль</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input type="password" class="form-control" placeholder="Password" v-model="re_password">
                                 <label for="floatingPassword">Повторите пароль</label>
                             </div>
-        
-                            <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
-                            </form>
-                    </div>
-                </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Вы соглашаетесь c условиями <router-link to="/privacy-policies">политики конфиденциальности</router-link> и <router-link to="/personal-data-processing-policy">политикой обработки персональных данных</router-link>
+                                </label>
+                            </div>
+                            <div class="d-grid text-center">
+                                <button type="submit" class="btn btn-dark">Зарегистрироваться</button>
+                            </div>
+                        </form>
 
+
+
+                        <!-- <button type="button" @click="ShowToast" class="btn btn-primary" id="liveToastBtn">Show live toast</button> -->
+
+
+                    </div>
+                </div>    
             </div>
         </div>
     </div>
@@ -33,6 +46,7 @@
 
 <script>
 import axios from 'axios'
+import { Toast } from 'bootstrap/dist/js/bootstrap.js'
 
 export default {
     name: 'SignUp',
@@ -40,11 +54,15 @@ export default {
         return {
             username: '',
             password: '',
-            password2: '',
+            re_password: '',
             errors: []
         }
     },
     methods: {
+        // ShowToast() {
+        //     const toastLiveExample = new Toast(document.getElementById('registrationToast'))
+        //     toastLiveExample.show()
+        // },
         submitForm() {
             this.errors = []
 
@@ -56,12 +74,12 @@ export default {
                 this.errors.push('Поле пароль не заполнено!')
             }
 
-            if (this.password2 === '') {
+            if (this.re_password === '') {
                 this.errors.push('Поле поворите пароль не заполнено!')
             }
 
 
-            if (this.password !== this.password2) {
+            if (this.password !== this.re_password) {
                 this.errors.push('Поле пароль и повторите пароль не заполнено!')
             }
 
@@ -74,6 +92,8 @@ export default {
                 axios
                     .post("/api/v1/users/", formData)
                     .then(response => {
+                        const toastLiveExample = new Toast(document.getElementById('registrationToast'))
+                        toastLiveExample.show()
                         this.$router.push('/log-in')
                     })
                     .catch(error => {
@@ -85,7 +105,6 @@ export default {
                             console.log(JSON.stringify(error.response.data))
                         } else if (error.message) {
                             this.errors.push('Something went wrong. Please try again')
-                            
                             console.log(JSON.stringify(error))
                         }
                     })
@@ -100,4 +119,15 @@ export default {
 .row {
     padding-bottom: 10rem;
 }
+ 
+.card-body a {
+    color: #333;
+    text-decoration: none;
+}
+.card-body p {
+    color: gray;
+    text-decoration: none;
+}
+
+
 </style>

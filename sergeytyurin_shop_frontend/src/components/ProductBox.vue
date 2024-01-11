@@ -50,9 +50,4 @@ a {
     text-decoration: none;
 }
 
-
-html, body {
-    /* Убирает прокрутку по горизонтале, для мобильной версии
-    overflow-x: hidden; */
-}
 </style>
