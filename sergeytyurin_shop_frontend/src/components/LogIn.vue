@@ -1,34 +1,178 @@
 <template>
     <div class="container-fluid">
-        <!-- <div class="row justify-content-center d-flex align-items-center min-vh-100"> -->
-        <div class="row justify-content-center mt-5">
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <form @submit.prevent="submitForm" class="mb-3">
-                            <div class="text-center">
-                                <h1>Вход</h1>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="" class="form-control" id="floatingInput" placeholder="name@example.com" v-model="username">
-                                <label for="floatingInput">Логин</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="password">
-                                <label for="floatingPassword">Пароль</label>
-                            </div>
-                            
-                            <div class="d-grid text-center">
-                                <button type="submit" class="btn btn-dark">Войти</button>
-                            </div>
-                        </form>
-
-                        <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
+        <div class="d-block d-sm-none"> <!-- Видно на XS -->
+            <div class="row justify-content-center mt-5">
+                <div class="col-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <form @submit.prevent="submitForm" class="mb-3">
+                                <div class="text-center">
+                                    <h1>Вход</h1>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="" class="form-control" placeholder="name@example.com" v-model="username">
+                                    <label for="floatingInput">Логин</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" placeholder="Password" v-model="password">
+                                    <label for="floatingPassword">Пароль</label>
+                                </div>
+                                
+                                <div class="d-grid text-center">
+                                    <button type="submit" class="btn btn-dark">Войти</button>
+                                </div>
+                            </form>
+                            <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
+                        </div>
                     </div>
                 </div>
-            
             </div>
         </div>
+
+        <div class="d-none d-sm-block d-md-none"> <!-- Видно на SM --> 
+            <div class="row justify-content-center mt-5">
+                <div class="col-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <form @submit.prevent="submitForm" class="mb-3">
+                                <div class="text-center">
+                                    <h1>Вход</h1>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="" class="form-control" placeholder="name@example.com" v-model="username">
+                                    <label for="floatingInput">Логин</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" placeholder="Password" v-model="password">
+                                    <label for="floatingPassword">Пароль</label>
+                                </div>
+                                
+                                <div class="d-grid text-center">
+                                    <button type="submit" class="btn btn-dark">Войти</button>
+                                </div>
+                            </form>
+                            <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-none d-md-block d-lg-none"><!-- Видно на MD -->
+            <div class="row justify-content-center mt-5">
+                <div class="col-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <form @submit.prevent="submitForm" class="mb-3">
+                                <div class="text-center">
+                                    <h1>Вход</h1>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="" class="form-control" placeholder="name@example.com" v-model="username">
+                                    <label for="floatingInput">Логин</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" placeholder="Password" v-model="password">
+                                    <label for="floatingPassword">Пароль</label>
+                                </div>
+                                
+                                <div class="d-grid text-center">
+                                    <button type="submit" class="btn btn-dark">Войти</button>
+                                </div>
+                            </form>
+                            <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-none d-lg-block d-xl-none"><!-- Видно на LG -->
+            <div class="row justify-content-center mt-5">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <form @submit.prevent="submitForm" class="mb-3">
+                                <div class="text-center">
+                                    <h1>Вход</h1>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="" class="form-control" placeholder="name@example.com" v-model="username">
+                                    <label for="floatingInput">Логин</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" placeholder="Password" v-model="password">
+                                    <label for="floatingPassword">Пароль</label>
+                                </div>
+                                
+                                <div class="d-grid text-center">
+                                    <button type="submit" class="btn btn-dark">Войти</button>
+                                </div>
+                            </form>
+                            <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-none d-xl-block d-xxl-none"><!-- Видно на XL -->
+            <div class="row justify-content-center mt-5">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <form @submit.prevent="submitForm" class="mb-3">
+                                <div class="text-center">
+                                    <h1>Вход</h1>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="" class="form-control" id="floatingInput" placeholder="name@example.com" v-model="username">
+                                    <label for="floatingInput">Логин</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password" v-model="password">
+                                    <label for="floatingPassword">Пароль</label>
+                                </div>
+                                
+                                <div class="d-grid text-center">
+                                    <button type="submit" class="btn btn-dark">Войти</button>
+                                </div>
+                            </form>
+
+                            <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="d-none d-sm-block d-xl-none d-xxl-block d-lg-none d-xl-block d-md-none d-lg-block d-sm-none d-md-block"> <!-- Видно на всех -->
+                <div class="row justify-content-center mt-5">
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <form @submit.prevent="submitForm" class="mb-3">
+                                <div class="text-center">
+                                    <h1>Вход</h1>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="" class="form-control" placeholder="name@example.com" v-model="username">
+                                    <label for="floatingInput">Логин</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" placeholder="Password" v-model="password">
+                                    <label for="floatingPassword">Пароль</label>
+                                </div>
+                                
+                                <div class="d-grid text-center">
+                                    <button type="submit" class="btn btn-dark">Войти</button>
+                                </div>
+                            </form>
+
+                            <p class="card-text text-center">Или <router-link to="/sign-up">зарегистрируйтесь</router-link> прямо сейчас!</p>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 

@@ -76,7 +76,9 @@
                         </ul>
                     </li>
                 </ul>
-            </div>    
+            </div>  
+
+        
 
             <div class="collapse navbar-collapse justify-content-center" id="navbarLogo">
                 <router-link to="/">
@@ -134,7 +136,7 @@
 
     <section class="section is-spaced" style="">
         <div class="toast-container position-fixed top-0 end-0 p-3">
-            <div id="registrationToast" class="toast text-bg-dark" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
+            <div id="registrationToast" class="toast text-bg-dark" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="1500">
                 <div class="toast-header">
                 <strong class="me-auto">Сергей Тюрин</strong>
                 <small>Сейчас</small>
