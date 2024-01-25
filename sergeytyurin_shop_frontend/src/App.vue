@@ -148,8 +148,6 @@
             </div>
         </div>
 
-
-        
       <router-view/>
     </section>
     
